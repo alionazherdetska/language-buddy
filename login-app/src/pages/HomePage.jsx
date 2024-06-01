@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles.css'; 
+import { Link } from 'react-router-dom';
 
 const HomePage = () => {
   return (
@@ -9,7 +10,7 @@ const HomePage = () => {
           <section>
             <h1>Connect, Communicate, Change Lives: Find Your Language Buddy in Switzerland Today!</h1>
             <p>Join a community where learning and teaching languages bridges cultures and transforms lives.</p>
-            <p><button>Find a Language Buddy</button></p>
+            <p><Link to='/sign-up'><button>Find a Language Buddy</button></Link></p>
           </section>
           <section>
             <img src="../images/hero.png" alt="people" />

@@ -77,6 +77,7 @@ nav ul {
   padding: 0;
   align-items: center;
 }
+
 nav li button {
   background: #6c4c9a;
   color: #fff;
@@ -124,15 +125,15 @@ main section {
 }
 
 @media (max-width: 768px) {
-  header nav ul {
-      display: none;
-      flex-direction: column;
-      background: #444;
-      position: absolute;
-      top: 60px;
-      right: 0;
-      width: 200px;
-  }
+  header nav ul:nth-of-type(2) {
+    display: none;
+    flex-direction: column;
+    background: #444;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 200px;
+}
 
   .nav-list.open {
       display: flex;
@@ -320,6 +321,7 @@ footer button, #hero button {
   padding: 0.5rem 3rem;
   margin-top: 2rem;
   font-weight: bold;
+  cursor: pointer;
 }
 footer .icons {
   display: flex;

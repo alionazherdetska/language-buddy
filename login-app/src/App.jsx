@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Routes, Route, Link, useNavigate, NavLink } from 'react-router-dom';
 
-import '@fortawesome/fontawesome-free/css/all.min.css';
 import './styles.css';
 
 import { AccountActivationPage } from './pages/AccountActivationPage';
@@ -14,6 +13,8 @@ import { Loader } from './components/Loader.jsx';
 import { usePageError } from './hooks/usePageError.js';
 import HomePage from './pages/HomePage.jsx';
 import Footer from './components/Footer.jsx';
+import { ProfilePage } from './pages/ProfilePage.jsx';
+import StudentMatchingPage from './pages/StudentMatchingPage.jsx';
 
 function App() {
 	const navigate = useNavigate();
@@ -43,6 +44,7 @@ function App() {
 							alt='Buddy Logo'
 						/>
 					</a>
+          
 					<nav class='mobile-nav'>
 						<button
 							className='nav-toggle'
@@ -127,6 +129,14 @@ function App() {
 							<Route
 								path='users'
 								element={<UsersPage />}
+							/>
+              <Route
+								path='profile'
+								element={<ProfilePage />}
+							/>
+              <Route
+								path='student-matching'
+								element={<StudentMatchingPage />}
 							/>
 						</Route>
 					</Routes>
