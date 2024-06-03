@@ -18,8 +18,30 @@ function getByEmail(email) {
 	});
 }
 
-function normalize({ id, email }) {
-	return { id, email };
+function normalize({
+	id,
+	email,
+	name,
+  surname,
+	canton,
+	languagesToLearn,
+	buddyType,
+	motherTongue,
+  hobbies,
+  countryOforigin,
+}) {
+	return {
+		id,
+		email,
+		name,
+    surname,
+		canton,
+		languagesToLearn,
+		buddyType,
+		motherTongue,
+    hobbies,
+    countryOforigin,
+	};
 }
 
 async function register({
@@ -29,10 +51,10 @@ async function register({
 	surname,
 	countryOforigin,
 	buddyType,
-  hobbies,
-  motherTongue,
+	motherTongue,
+	hobbies,
+	languagesToLearn,
 	canton,
-  languagesToLearn,
 }) {
 	const existingUser = await getByEmail(email);
 
@@ -53,8 +75,8 @@ async function register({
 		surname,
 		countryOforigin,
 		buddyType,
-    motherTongue,
-    hobbies,
+		motherTongue,
+		hobbies,
 		languagesToLearn,
 		canton,
 	});
