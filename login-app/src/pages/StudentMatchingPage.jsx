@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { userService } from '../services/userService.js';
-
 import '../styles.css';
 import { usePageError } from '../hooks/usePageError.js';
+import { cantonMap } from '../utils/cantonMap.js';
+
 
 const LanguageSelector = ({ changeCanton }) => {
   const handleCantonChange = (event) => {
-    changeCanton(event.target.value);
+    const selectedFullCanton = event.target.value;
+    const selectedCantonAbbreviation = cantonMap[selectedFullCanton.toLowerCase()];
+    changeCanton(selectedCantonAbbreviation);
   };
 
   return (
@@ -74,6 +77,7 @@ const LanguageSelector = ({ changeCanton }) => {
 const TeacherList = ({ selectedCanton }) => {
   const [error, setError] = usePageError('');
   const [users, setUsers] = useState([]);
+  const [filteredTeachers, setFilteredTeachers] = useState([]);
 
   useEffect(() => {
     userService
@@ -81,6 +85,7 @@ const TeacherList = ({ selectedCanton }) => {
       .then((data) => {
         const teachers = data.filter((user) => user.buddyType === 'teacher');
         setUsers(teachers);
+        setFilteredTeachers(teachers);
         console.log(teachers);
       })
       .catch((error) => {
@@ -89,9 +94,12 @@ const TeacherList = ({ selectedCanton }) => {
       });
   }, []);
 
-  const filteredTeachers = selectedCanton
-    ? users.filter((teacher) => teacher.canton === selectedCanton)
-    : users;
+  useEffect(() => {
+    const filtered = selectedCanton
+      ? users.filter((teacher) => teacher.canton === selectedCanton)
+      : users;
+    setFilteredTeachers(filtered);
+  }, [selectedCanton, users]);
 
   return (
     <section id='user_teachers'>
