@@ -4,13 +4,13 @@ import { Footer } from './Footer.jsx';
 import { Header } from './Header.jsx';
 
 export const Layout = () => {
-  return (
-    <div>
-      <Header />
-      <main>
-        <Outlet />
-      </main>
-      <Footer />
-    </div>
-  );
+	return (
+		<div>
+			<Header />
+			<main>
+				<Outlet />
+			</main>
+			<Footer />
+		</div>
+	);
 };
