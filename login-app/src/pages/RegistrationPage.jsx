@@ -75,6 +75,7 @@ export const RegistrationPage = () => {
 					countryOfOrigin: '',
 					languagesToLearn: '',
 					canton: '',
+					gender: '',
 				}}
 				validateOnMount={true}
 				onSubmit={(
@@ -89,6 +90,7 @@ export const RegistrationPage = () => {
 						countryOfOrigin,
 						languagesToLearn,
 						canton,
+						gender,
 					},
 					formikHelpers
 				) => {
@@ -106,6 +108,7 @@ export const RegistrationPage = () => {
 							countryOfOrigin,
 							languagesToLearn,
 							canton,
+							gender,
 						})
 						.then(() => {
 							setRegistered(true);
@@ -208,6 +211,32 @@ export const RegistrationPage = () => {
 								<p className='help is-danger'>{errors.surname}</p>
 							)}
 						</div>
+          
+						<div className='field'>
+							<label
+								htmlFor='gender'
+								className='label'
+							>
+								Gender
+							</label>
+							<div className='control'>
+								<Field
+									as='select'
+									name='gender'
+									id='gender'
+									className='select'
+								>
+									<option value=''>Select Gender</option>
+									<option value='male'>Male</option>
+									<option value='female'>Female</option>
+									<option value='other'>Other</option>
+								</Field>
+							</div>
+							{touched.gender && errors.gender && (
+								<p className='help is-danger'>{errors.gender}</p>
+							)}
+						</div>
+
 						<div className='field'>
 							<label
 								htmlFor='email'
