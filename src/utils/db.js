@@ -1,15 +1,15 @@
 import { Sequelize } from 'sequelize';
 
 // Get the password from the environment variables
-const password = process.env.POSTGRES_PASSWORD || '';
+const password = 'postgres' || '';
 
 // Modify the password if it's empty
 const modifiedPassword = password.length === 0 ? ' ' : password;
 
 export const sequelize = new Sequelize({
   dialect: 'postgres',
-  host: process.env.POSTGRES_HOST,
-  database: process.env.POSTGRES_DB,
-  username: process.env.POSTGRES_USER,
+  host: '127.0.0.1',
+  database: 'postgres',
+  username: 'postgres',
   password: modifiedPassword,
 });
