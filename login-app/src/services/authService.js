@@ -5,26 +5,26 @@ function register({
 	password,
 	name,
 	surname,
-  gender,
-  motherTongue,
-  hobbies,
+	gender,
+	motherTongue,
+	hobbies,
 	buddyType,
-  languagesToLearn,
+	languagesToLearn,
 	countryOfOrigin,
-  canton
+	canton,
 }) {
 	return authClient.post('/registration', {
 		email,
 		password,
-    motherTongue,
+		motherTongue,
 		name,
-    gender,
+		gender,
 		surname,
-    hobbies,
+		hobbies,
 		buddyType,
 		countryOfOrigin,
-    languagesToLearn,
-    canton
+		languagesToLearn,
+		canton,
 	});
 }
 

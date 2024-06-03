@@ -211,7 +211,6 @@ export const RegistrationPage = () => {
 								<p className='help is-danger'>{errors.surname}</p>
 							)}
 						</div>
-          
 						<div className='field'>
 							<label
 								htmlFor='gender'
@@ -236,7 +235,6 @@ export const RegistrationPage = () => {
 								<p className='help is-danger'>{errors.gender}</p>
 							)}
 						</div>
-
 						<div className='field'>
 							<label
 								htmlFor='email'

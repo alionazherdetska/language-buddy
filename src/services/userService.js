@@ -29,7 +29,7 @@ function normalize({
 	buddyType,
 	motherTongue,
   hobbies,
-  countryOforigin,
+  countryOfOrigin,
 }) {
 	return {
 		id,
@@ -42,7 +42,7 @@ function normalize({
 		buddyType,
 		motherTongue,
     hobbies,
-    countryOforigin,
+    countryOfOrigin,
 	};
 }
 
@@ -52,7 +52,7 @@ async function register({
 	name,
 	surname,
   gender,
-	countryOforigin,
+	countryOfOrigin,
 	buddyType,
 	motherTongue,
 	hobbies,
@@ -77,7 +77,7 @@ async function register({
 		name,
     gender,
 		surname,
-		countryOforigin,
+		countryOfOrigin,
 		buddyType,
 		motherTongue,
 		hobbies,
