@@ -4,7 +4,7 @@ import '../styles.css';
 import { usePageError } from '../hooks/usePageError.js';
 import { cantonMap } from '../utils/cantonMap.js';
 
-const LanguageSelector = ({ changeCanton, changeGender }) => {
+const LanguageSelector = ({ changeCanton, changeGender, changeLanguage }) => {
 	const handleCantonChange = (event) => {
 		const selectedFullCanton = event.target.value;
 		const selectedCantonAbbreviation =
@@ -17,29 +17,33 @@ const LanguageSelector = ({ changeCanton, changeGender }) => {
     changeGender(selectedGender);
   }
 
+  const handleLanguageChange = (lang) => {
+    changeLanguage(lang);
+  }
+
 	return (
 		<section id='user_languages'>
 			<h2>Select your language</h2>
 			<ul>
-				<li>
+      <li onClick={() => handleLanguageChange('German')}>
 					<img
 						src='../images/flags/de.svg'
 						alt='German'
 					/>
 				</li>
-				<li>
+        <li onClick={() => handleLanguageChange('Italian')}>
 					<img
 						src='../images/flags/it.svg'
 						alt='Italian'
 					/>
 				</li>
-				<li>
+        <li onClick={() => handleLanguageChange('French')}>
 					<img
 						src='../images/flags/fr.svg'
 						alt='French'
 					/>
 				</li>
-				<li>
+        <li onClick={() => handleLanguageChange('Ukrainian')}>
 					<img
 						src='../images/flags/ua.svg'
 						alt='Ukrainian'
@@ -103,7 +107,7 @@ const LanguageSelector = ({ changeCanton, changeGender }) => {
 	);
 };
 
-const TeacherList = ({ selectedCanton, gender }) => {
+const TeacherList = ({ selectedCanton, gender, language }) => {
 	const [error, setError] = usePageError('');
 	const [users, setUsers] = useState([]);
 	const [filteredTeachers, setFilteredTeachers] = useState([]);
@@ -129,10 +133,11 @@ const TeacherList = ({ selectedCanton, gender }) => {
         const filterByCanton = !selectedCanton || teacher.canton === selectedCanton;
         // Filter by gender if it's not empty
         const filterByGender = !gender || teacher.gender === gender;
-        return filterByCanton && filterByGender;
+        const filterByLanguage = !language || teacher.motherTongue === language;
+        return filterByCanton && filterByGender && filterByLanguage;
     });
     setFilteredTeachers(filtered);
-}, [selectedCanton, gender, users]);
+}, [selectedCanton, gender, users, language]);
 
 
 	return (
@@ -179,6 +184,7 @@ const TeacherList = ({ selectedCanton, gender }) => {
 const StudentMatchingPage = () => {
 	const [selectedCanton, setSelectedCanton] = useState('');
 	const [gender, setGender] = useState('');
+  const [language, setLanguage] = useState('');
 
 	return (
 		<div>
@@ -188,10 +194,12 @@ const StudentMatchingPage = () => {
 					<LanguageSelector
 						changeCanton={setSelectedCanton}
 						changeGender={setGender}
+            changeLanguage={setLanguage}
 					/>
 					<TeacherList
 						selectedCanton={selectedCanton}
 						gender={gender}
+            language={language}
 					/>
 				</div>
 			</main>
