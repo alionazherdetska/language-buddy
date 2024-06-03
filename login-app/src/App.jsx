@@ -37,15 +37,15 @@ function App() {
 	return (
 		<>
 			<header>
-				<div class='header-content'>
+				<div className='header-content'>
+					{/* you cannot use the import logo because its outside */}
 					<a href='/'>
 						<img
 							src='../images/buddy-logo.svg'
 							alt='Buddy Logo'
 						/>
 					</a>
-          
-					<nav class='mobile-nav'>
+					<nav className ='mobile-nav'>
 						<button
 							className='nav-toggle'
 							aria-label='Open Navigation Menu'
@@ -53,7 +53,7 @@ function App() {
 						>
 							☰
 						</button>
-						<ul class='nav-list'>
+						<ul className={`nav-list ${isNavOpen ? 'open' : ''}`}>
 							<li>
 								<NavLink to='#'>Home</NavLink>
 							</li>
@@ -130,11 +130,11 @@ function App() {
 								path='users'
 								element={<UsersPage />}
 							/>
-              <Route
+							<Route
 								path='profile'
 								element={<ProfilePage />}
 							/>
-              <Route
+							<Route
 								path='student-matching'
 								element={<StudentMatchingPage />}
 							/>
@@ -144,7 +144,7 @@ function App() {
 
 				{error && <p className='notification is-danger is-light'>{error}</p>}
 			</main>
-      <Footer />
+			<Footer />
 		</>
 	);
 }
