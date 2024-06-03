@@ -239,6 +239,7 @@ main section {
 #user_languages li img {
   border-radius: 1rem;
   width: 40%;
+  cursor: pointer;
 }
 
 #user_teachers ul {
