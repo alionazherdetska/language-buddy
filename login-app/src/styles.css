@@ -555,7 +555,7 @@ button {
   color: #fff;
   border-radius: 0.8rem;
   border: none;
-  padding: 0.5rem 3rem;
+  padding: 0.5rem 2rem;
   cursor: pointer;
 }
 
@@ -577,31 +577,19 @@ button {
 .btn-container {
   display: flex;
   justify-content: center;
-  gap: 50px;
+  gap: 20px;
 }
 
-.langOps {
+.registrationForm {
+  background-color: #fff;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 1rem;
 }
 
-.langOps label {
-  margin-bottom: 10px;
-}
-
-.option {
-  display: block;
-  padding: 10px;
-  border: 2px solid #e3e1fd;
-  margin: 5px;
-  color: black;
-  border-radius: 5px;
-}
-
-.optionslang {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px; /* Add some space between the options */
+.formh{
+  text-align: center;
 }
