@@ -142,7 +142,7 @@ export const RegistrationPage = () => {
 						surname,
 						buddyType,
 						hobbies,
-						motherTongue: buddyType === 'teacher' ? motherTongue : 'N/A',
+						motherTongue: buddyType === 'teacher' ? motherTongue : 'German',
 						languagesToLearn:
 							buddyType === 'student' ? languagesToLearn : 'German',
 						countryOfOrigin,
@@ -440,15 +440,22 @@ export const RegistrationPage = () => {
 									</label>
 									<div className='control'>
 										<Field
+											as='select'
 											name='motherTongue'
-											type='text'
 											id='motherTongue'
-											placeholder='e.g. English'
-											className={cn('input', {
+											required
+											className={cn('select', {
 												'is-danger':
 													touched.motherTongue && errors.motherTongue,
 											})}
-										/>
+										>
+											<option value=''>Select your Mother Tongue</option>
+											<option value='German'>German</option>
+											<option value='French'>French</option>
+											<option value='Italian'>Italian</option>
+											<option value='English'>English</option>
+											<option value='Swiss German'>Swiss German</option>
+										</Field>
 									</div>
 									{touched.motherTongue && errors.motherTongue && (
 										<p className='help is-danger'>{errors.motherTongue}</p>
