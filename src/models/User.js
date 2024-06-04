@@ -72,7 +72,13 @@ export const User = sequelize.define('user', {
 		allowNull: true,
 	},
 	motherTongue: {
-		type: DataTypes.STRING,
+		type: DataTypes.ENUM(
+			'German',
+			'French',
+			'Italian',
+			'English',
+			'Swiss German'
+		),
 		allowNull: true,
 	},
 	hobbies: {
