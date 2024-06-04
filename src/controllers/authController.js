@@ -47,6 +47,13 @@ function validateSurname(value) {
 	}
 }
 
+function validateGender(value) {
+	const validGenders = ['male', 'female', 'other'];
+	if (!validGenders.includes(value)) {
+		return 'Invalid gender';
+	}
+}
+
 function validateBuddyType(value) {
 	if (!value) {
 		return 'Buddy type is required';
@@ -128,6 +135,7 @@ async function register(req, res, next) {
 		password,
 		name,
     hobbies,
+    gender,
 		surname,
     motherTongue,
 		buddyType,
@@ -147,6 +155,7 @@ async function register(req, res, next) {
 		canton: validateCanton(canton),
     motherTongue: validateMotherTongue(motherTongue),
     hobbies: validateHobbies(hobbies),
+    gender: validateGender(gender),
 	};
 
 	if (
@@ -154,6 +163,7 @@ async function register(req, res, next) {
 		errors.password ||
 		errors.name ||
 		errors.surname ||
+    errors.gender ||
 		errors.buddyType ||
 		errors.canton ||
     errors.hobbies ||
@@ -168,6 +178,7 @@ async function register(req, res, next) {
 		email,
 		password,
 		name,
+    gender,
 		surname,
     hobbies,
 		countryOfOrigin,

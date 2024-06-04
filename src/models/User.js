@@ -79,4 +79,8 @@ export const User = sequelize.define('user', {
 		type: DataTypes.STRING,
 		allowNull: true,
 	},
+  gender: {
+    type: DataTypes.ENUM('male', 'female', 'other'),
+    allowNull: true,
+},
 });

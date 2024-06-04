@@ -5,32 +5,39 @@ function register({
 	password,
 	name,
 	surname,
-  motherTongue,
-  hobbies,
+	gender,
+	motherTongue,
+	hobbies,
 	buddyType,
-  languagesToLearn,
+	languagesToLearn,
 	countryOfOrigin,
-  canton
+	canton,
 }) {
 	return authClient.post('/registration', {
 		email,
 		password,
-    motherTongue,
+		motherTongue,
 		name,
+		gender,
 		surname,
-    hobbies,
+		hobbies,
 		buddyType,
 		countryOfOrigin,
-    languagesToLearn,
-    canton
+		languagesToLearn,
+		canton,
 	});
 }
 
-function login({ email, password }) {
-	return authClient.post('/login', { email, password });
+async function login({ email, password }) {
+  const response = await authClient.post('/login', { email, password });
+  localStorage.setItem('userEmail', email);
+  console.log(localStorage)
+  
+  return response;
 }
 
 function logout() {
+  localStorage.removeItem('userEmail');
 	return authClient.post('/logout');
 }
 

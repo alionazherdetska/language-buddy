@@ -24,11 +24,12 @@ function normalize({
 	name,
   surname,
 	canton,
+  gender,
 	languagesToLearn,
 	buddyType,
 	motherTongue,
   hobbies,
-  countryOforigin,
+  countryOfOrigin,
 }) {
 	return {
 		id,
@@ -36,11 +37,12 @@ function normalize({
 		name,
     surname,
 		canton,
+    gender,
 		languagesToLearn,
 		buddyType,
 		motherTongue,
     hobbies,
-    countryOforigin,
+    countryOfOrigin,
 	};
 }
 
@@ -49,7 +51,8 @@ async function register({
 	password,
 	name,
 	surname,
-	countryOforigin,
+  gender,
+	countryOfOrigin,
 	buddyType,
 	motherTongue,
 	hobbies,
@@ -72,8 +75,9 @@ async function register({
 		password: hash,
 		activationToken,
 		name,
+    gender,
 		surname,
-		countryOforigin,
+		countryOfOrigin,
 		buddyType,
 		motherTongue,
 		hobbies,

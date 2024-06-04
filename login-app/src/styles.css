@@ -125,7 +125,7 @@ main section {
 }
 
 @media (max-width: 768px) {
-  header nav ul:nth-of-type(2) {
+  header nav ul {
     display: none;
     flex-direction: column;
     background: #444;
@@ -239,6 +239,7 @@ main section {
 #user_languages li img {
   border-radius: 1rem;
   width: 40%;
+  cursor: pointer;
 }
 
 #user_teachers ul {
