@@ -51,6 +51,7 @@ const validateSurname = (value) => {
 export const RegistrationPage = () => {
 	const [error, setError] = usePageError('');
 	const [registered, setRegistered] = useState(false);
+	const [shown, setShown] = useState(false);
 	const [buddyType, setBuddyType] = useState('');
 
 	if (registered) {
@@ -105,8 +106,7 @@ export const RegistrationPage = () => {
 
 					if (values.buddyType === 'student') {
 						if (!values.languagesToLearn) {
-							errors.languagesToLearn =
-								'Languages to Learn';
+							errors.languagesToLearn = 'Languages to Learn';
 						}
 					}
 
@@ -181,9 +181,14 @@ export const RegistrationPage = () => {
 				}}
 			>
 				{({ touched, errors, isSubmitting, setFieldValue }) => (
-					<Form className='box'>
+					<Form className='registrationForm'>
 						<h1 className='title'>Sign up</h1>
-						<div className='field'>
+						<p>Sign up in two steps</p>
+						<section
+							id='step1'
+							className='step active'
+						>
+							<h2>Step 1</h2>
 							<label
 								htmlFor='name'
 								className='label'
@@ -217,345 +222,363 @@ export const RegistrationPage = () => {
 							{touched.name && errors.name && (
 								<p className='help is-danger'>{errors.name}</p>
 							)}
-						</div>
-						<div className='field'>
-							<label
-								htmlFor='surname'
-								className='label'
-							>
-								Surname
-							</label>
 
-							<div className='control has-icons-left has-icons-right'>
-								<Field
-									validate={validateSurname}
-									name='surname'
-									type='text'
-									id='surname'
-									placeholder='e.g. Smith'
-									className={cn('input', {
-										'is-danger': touched.surname && errors.surname,
-									})}
-								/>
+							<div className='field'>
+								<label
+									htmlFor='surname'
+									className='label'
+								>
+									Surname
+								</label>
 
-								<span className='icon is-small is-left'>
-									<i className='fa fa-user'></i>
-								</span>
+								<div className='control has-icons-left has-icons-right'>
+									<Field
+										validate={validateSurname}
+										name='surname'
+										type='text'
+										id='surname'
+										placeholder='e.g. Smith'
+										className={cn('input', {
+											'is-danger': touched.surname && errors.surname,
+										})}
+									/>
+
+									<span className='icon is-small is-left'>
+										<i className='fa fa-user'></i>
+									</span>
+
+									{touched.surname && errors.surname && (
+										<span className='icon is-small is-right has-text-danger'>
+											<i className='fas fa-exclamation-triangle'></i>
+										</span>
+									)}
+								</div>
 
 								{touched.surname && errors.surname && (
-									<span className='icon is-small is-right has-text-danger'>
-										<i className='fas fa-exclamation-triangle'></i>
-									</span>
+									<p className='help is-danger'>{errors.surname}</p>
 								)}
 							</div>
-
-							{touched.surname && errors.surname && (
-								<p className='help is-danger'>{errors.surname}</p>
-							)}
-						</div>
-						<div className='field'>
-							<label
-								htmlFor='gender'
-								className='label'
-							>
-								Gender
-							</label>
-							<div className='control'>
-								<Field
-									as='select'
-									name='gender'
-									id='gender'
-									className='select'
+							<div className='field'>
+								<label
+									htmlFor='gender'
+									className='label'
 								>
-									<option value=''>Select Gender</option>
-									<option value='male'>Male</option>
-									<option value='female'>Female</option>
-									<option value='other'>Other</option>
-								</Field>
+									Gender
+								</label>
+								<div className='control'>
+									<Field
+										as='select'
+										name='gender'
+										id='gender'
+										className='select'
+									>
+										<option value=''>Select Gender</option>
+										<option value='male'>Male</option>
+										<option value='female'>Female</option>
+										<option value='other'>Other</option>
+									</Field>
+								</div>
+								{touched.gender && errors.gender && (
+									<p className='help is-danger'>{errors.gender}</p>
+								)}
 							</div>
-							{touched.gender && errors.gender && (
-								<p className='help is-danger'>{errors.gender}</p>
-							)}
-						</div>
-						<div className='field'>
-							<label
-								htmlFor='email'
-								className='label'
-							>
-								Email
-							</label>
+							<div className='field'>
+								<label
+									htmlFor='email'
+									className='label'
+								>
+									Email
+								</label>
 
-							<div className='control has-icons-left has-icons-right'>
-								<Field
-									validate={validateEmail}
-									name='email'
-									type='email'
-									id='email'
-									placeholder='e.g. bobsmith@gmail.com'
-									className={cn('input', {
-										'is-danger': touched.email && errors.email,
-									})}
-								/>
+								<div className='control has-icons-left has-icons-right'>
+									<Field
+										validate={validateEmail}
+										name='email'
+										type='email'
+										id='email'
+										placeholder='e.g. bobsmith@gmail.com'
+										className={cn('input', {
+											'is-danger': touched.email && errors.email,
+										})}
+									/>
 
-								<span className='icon is-small is-left'>
-									<i className='fa fa-envelope'></i>
-								</span>
+									<span className='icon is-small is-left'>
+										<i className='fa fa-envelope'></i>
+									</span>
+
+									{touched.email && errors.email && (
+										<span className='icon is-small is-right has-text-danger'>
+											<i className='fas fa-exclamation-triangle'></i>
+										</span>
+									)}
+								</div>
 
 								{touched.email && errors.email && (
-									<span className='icon is-small is-right has-text-danger'>
-										<i className='fas fa-exclamation-triangle'></i>
-									</span>
+									<p className='help is-danger'>{errors.email}</p>
 								)}
 							</div>
+							<div className='field'>
+								<label
+									htmlFor='password'
+									className='label'
+								>
+									Password
+								</label>
 
-							{touched.email && errors.email && (
-								<p className='help is-danger'>{errors.email}</p>
-							)}
-						</div>
-						<div className='field'>
-							<label
-								htmlFor='password'
-								className='label'
-							>
-								Password
-							</label>
-
-							<div className='control has-icons-left has-icons-right'>
-								<Field
-									validate={validatePassword}
-									name='password'
-									type='password'
-									id='password'
-									placeholder='*******'
-									className={cn('input', {
-										'is-danger': touched.password && errors.password,
-									})}
-								/>
-
-								<div className='field'>
-									<label
-										htmlFor='buddyType'
-										className='label'
-									>
-										Buddy Type
-									</label>
-									<div className='control'>
-										<Field
-											as='select'
-											name='buddyType'
-											id='buddyType'
-											className='select'
-											onChange={(e) => {
-												setFieldValue('buddyType', e.target.value);
-												setBuddyType(e.target.value);
-                        console.log(e.target.value)
-											}}
-										>
-											<option value=''>Select Buddy Type</option>
-											<option value='student'>Student</option>
-											<option value='teacher'>Teacher</option>
-										</Field>
-									</div>
-									{touched.buddyType && errors.buddyType && (
-										<p className='help is-danger'>{errors.buddyType}</p>
+								<div className='control has-icons-left has-icons-right'>
+									<Field
+										validate={validatePassword}
+										name='password'
+										type='password'
+										id='password'
+										placeholder='*******'
+										className={cn('input', {
+											'is-danger': touched.password && errors.password,
+										})}
+									/>
+									{touched.password && errors.password ? (
+										<p className='help is-danger'>{errors.password}</p>
+									) : (
+										<p className='help'>At least 6 characters</p>
 									)}
-								</div>
 
-								{/* Conditionally render the fields based on buddyType */}
-								{buddyType === 'student' && (
-									<div className='field'>
-										<label
-											htmlFor='languagesToLearn'
-											className='label'
-										>
-											Languages to learn
-										</label>
-										<div className='control'>
-											<Field
-												as='select'
-												name='languagesToLearn'
-												id='languagesToLearn'
-												required
-												className={cn('select', {
-													'is-danger':
-														touched.languagesToLearn && errors.languagesToLearn,
-												})}
-											>
-												<option value=''>Select Languages to Learn</option>
-												<option value='German'>German</option>
-												<option value='French'>French</option>
-												<option value='Italian'>Italian</option>
-												<option value='English'>English</option>
-												<option value='Swiss German'>Swiss German</option>
-											</Field>
-										</div>
-										{touched.languagesToLearn && errors.languagesToLearn && (
-											<p className='help is-danger'>
-												{errors.languagesToLearn}
-											</p>
-										)}
-									</div>
-								)}
-
-								{buddyType === 'teacher' && (
-									<div className='field'>
-										<label
-											htmlFor='motherTongue'
-											className='label'
-										>
-											Mother Tongue
-										</label>
-										<div className='control'>
-											<Field
-												name='motherTongue'
-												type='text'
-												id='motherTongue'
-												placeholder='e.g. English'
-												className={cn('input', {
-													'is-danger':
-														touched.motherTongue && errors.motherTongue,
-												})}
-											/>
-										</div>
-										{touched.motherTongue && errors.motherTongue && (
-											<p className='help is-danger'>{errors.motherTongue}</p>
-										)}
-									</div>
-								)}
-
-								<div className='field'>
-									<label
-										htmlFor='countryOfOrigin'
-										className='label'
-									>
-										Country of Origin
-									</label>
-									<div className='control'>
-										<Field
-											name='countryOfOrigin'
-											type='text'
-											id='countryOfOrigin'
-											placeholder='e.g. USA'
-											className={cn('input', {
-												'is-danger':
-													touched.countryOfOrigin && errors.countryOfOrigin,
-											})}
-										/>
-									</div>
-									{touched.countryOfOrigin && errors.countryOfOrigin && (
-										<p className='help is-danger'>{errors.countryOfOrigin}</p>
-									)}
-								</div>
-
-								<div className='field'>
-									<label
-										htmlFor='canton'
-										className='label'
-									>
-										Canton
-									</label>
-									<div className='control'>
-										<Field
-											as='select'
-											name='canton'
-											id='canton'
-											required
-											className={cn('select', {
-												'is-danger': touched.canton && errors.canton,
-											})}
-										>
-											<option value=''>Select Canton</option>
-											<option value='AG'>Aargau (AG)</option>
-											<option value='AI'>Appenzell Innerrhoden (AI)</option>
-											<option value='AR'>Appenzell Ausserrhoden (AR)</option>
-											<option value='BE'>Bern (BE)</option>
-											<option value='BL'>Basel-Landschaft (BL)</option>
-											<option value='BS'>Basel-Stadt (BS)</option>
-											<option value='FR'>Fribourg (FR)</option>
-											<option value='GE'>Geneva (GE)</option>
-											<option value='GL'>Glarus (GL)</option>
-											<option value='GR'>Graubünden (GR)</option>
-											<option value='JU'>Jura (JU)</option>
-											<option value='LU'>Lucerne (LU)</option>
-											<option value='NE'>Neuchâtel (NE)</option>
-											<option value='NW'>Nidwalden (NW)</option>
-											<option value='OW'>Obwalden (OW)</option>
-											<option value='SG'>St. Gallen (SG)</option>
-											<option value='SH'>Schaffhausen (SH)</option>
-											<option value='SO'>Solothurn (SO)</option>
-											<option value='SZ'>Schwyz (SZ)</option>
-											<option value='TG'>Thurgau (TG)</option>
-											<option value='TI'>Ticino (TI)</option>
-											<option value='UR'>Uri (UR)</option>
-											<option value='VD'>Vaud (VD)</option>
-											<option value='VS'>Valais (VS)</option>
-											<option value='ZG'>Zug (ZG)</option>
-											<option value='ZH'>Zurich (ZH)</option>
-										</Field>
-									</div>
-									{touched.canton && errors.canton && (
-										<p className='help is-danger'>{errors.canton}</p>
-									)}
-								</div>
-
-								<div className='field'>
-									<label
-										htmlFor='hobbies'
-										className='label'
-									>
-										Hobbies
-									</label>
-									<div className='control'>
-										<Field
-											name='hobbies'
-											type='text'
-											id='hobbies'
-											placeholder='My hobbies are...'
-											className={cn('input', {
-												'is-danger': touched.hobbies && errors.hobbies,
-											})}
-										/>
-									</div>
-									{touched.hobbies && errors.hobbies && (
-										<p className='help is-danger'>{errors.hobbies}</p>
-									)}
-								</div>
-
-								<span className='icon is-small is-left'>
-									<i className='fa fa-lock'></i>
-								</span>
-
-								{touched.password && errors.password && (
-									<span className='icon is-small is-right has-text-danger'>
-										<i className='fas fa-exclamation-triangle'></i>
+									<span className='icon is-small is-left'>
+										<i className='fa fa-lock'></i>
 									</span>
-								)}
-							</div>
 
-							{touched.password && errors.password ? (
-								<p className='help is-danger'>{errors.password}</p>
-							) : (
-								<p className='help'>At least 6 characters</p>
-							)}
-						</div>
-						<div className='field'>
+									{touched.password && errors.password && (
+										<span className='icon is-small is-right has-text-danger'>
+											<i className='fas fa-exclamation-triangle'></i>
+										</span>
+									)}
+								</div>
+							</div>
+						</section>
+						<div class='btn-container'>
 							<button
-								type='submit'
-								className={cn('button is-success has-text-weight-bold', {
-									'is-loading': isSubmitting,
-								})}
-								disabled={
-									isSubmitting ||
-									errors.email ||
-									errors.password ||
-									errors.name ||
-									errors.surname
-								}
+								type='button'
+								onClick={() => setShown(!shown)}
 							>
-								Sign up
+								Next
 							</button>
 						</div>
-						Already have an account? <Link to='/login'>Log in</Link>
+
+						<section
+							id='step2'
+							className={shown ? 'step.active' : 'step'}
+						>
+							<h2 className='formh'>Step 2</h2>
+							<div className='field'>
+								<label
+									htmlFor='buddyType'
+									className='label'
+								>
+									Buddy Type
+								</label>
+								<div className='control'>
+									<Field
+										as='select'
+										name='buddyType'
+										id='buddyType'
+										className='select'
+										onChange={(e) => {
+											setFieldValue('buddyType', e.target.value);
+											setBuddyType(e.target.value);
+											console.log(e.target.value);
+										}}
+									>
+										<option value=''>Select Buddy Type</option>
+										<option value='student'>Student</option>
+										<option value='teacher'>Teacher</option>
+									</Field>
+								</div>
+								{touched.buddyType && errors.buddyType && (
+									<p className='help is-danger'>{errors.buddyType}</p>
+								)}
+							</div>
+
+							{buddyType === 'student' && (
+								<div className='field'>
+									<label
+										htmlFor='languagesToLearn'
+										className='label'
+									>
+										Languages to learn
+									</label>
+									<div className='control'>
+										<Field
+											as='select'
+											name='languagesToLearn'
+											id='languagesToLearn'
+											required
+											className={cn('select', {
+												'is-danger':
+													touched.languagesToLearn && errors.languagesToLearn,
+											})}
+										>
+											<option value=''>Select Languages to Learn</option>
+											<option value='German'>German</option>
+											<option value='French'>French</option>
+											<option value='Italian'>Italian</option>
+											<option value='English'>English</option>
+											<option value='Swiss German'>Swiss German</option>
+										</Field>
+									</div>
+									{touched.languagesToLearn && errors.languagesToLearn && (
+										<p className='help is-danger'>{errors.languagesToLearn}</p>
+									)}
+								</div>
+							)}
+
+							{buddyType === 'teacher' && (
+								<div className='field'>
+									<label
+										htmlFor='motherTongue'
+										className='label'
+									>
+										Mother Tongue
+									</label>
+									<div className='control'>
+										<Field
+											name='motherTongue'
+											type='text'
+											id='motherTongue'
+											placeholder='e.g. English'
+											className={cn('input', {
+												'is-danger':
+													touched.motherTongue && errors.motherTongue,
+											})}
+										/>
+									</div>
+									{touched.motherTongue && errors.motherTongue && (
+										<p className='help is-danger'>{errors.motherTongue}</p>
+									)}
+								</div>
+							)}
+
+							<div className='field'>
+								<label
+									htmlFor='countryOfOrigin'
+									className='label'
+								>
+									Country of Origin
+								</label>
+								<div className='control'>
+									<Field
+										name='countryOfOrigin'
+										type='text'
+										id='countryOfOrigin'
+										placeholder='e.g. USA'
+										className={cn('input', {
+											'is-danger':
+												touched.countryOfOrigin && errors.countryOfOrigin,
+										})}
+									/>
+								</div>
+								{touched.countryOfOrigin && errors.countryOfOrigin && (
+									<p className='help is-danger'>{errors.countryOfOrigin}</p>
+								)}
+							</div>
+
+							<div className='field'>
+								<label
+									htmlFor='canton'
+									className='label'
+								>
+									Canton
+								</label>
+								<div className='control'>
+									<Field
+										as='select'
+										name='canton'
+										id='canton'
+										required
+										className={cn('select', {
+											'is-danger': touched.canton && errors.canton,
+										})}
+									>
+										<option value=''>Select Canton</option>
+										<option value='AG'>Aargau (AG)</option>
+										<option value='AI'>Appenzell Innerrhoden (AI)</option>
+										<option value='AR'>Appenzell Ausserrhoden (AR)</option>
+										<option value='BE'>Bern (BE)</option>
+										<option value='BL'>Basel-Landschaft (BL)</option>
+										<option value='BS'>Basel-Stadt (BS)</option>
+										<option value='FR'>Fribourg (FR)</option>
+										<option value='GE'>Geneva (GE)</option>
+										<option value='GL'>Glarus (GL)</option>
+										<option value='GR'>Graubünden (GR)</option>
+										<option value='JU'>Jura (JU)</option>
+										<option value='LU'>Lucerne (LU)</option>
+										<option value='NE'>Neuchâtel (NE)</option>
+										<option value='NW'>Nidwalden (NW)</option>
+										<option value='OW'>Obwalden (OW)</option>
+										<option value='SG'>St. Gallen (SG)</option>
+										<option value='SH'>Schaffhausen (SH)</option>
+										<option value='SO'>Solothurn (SO)</option>
+										<option value='SZ'>Schwyz (SZ)</option>
+										<option value='TG'>Thurgau (TG)</option>
+										<option value='TI'>Ticino (TI)</option>
+										<option value='UR'>Uri (UR)</option>
+										<option value='VD'>Vaud (VD)</option>
+										<option value='VS'>Valais (VS)</option>
+										<option value='ZG'>Zug (ZG)</option>
+										<option value='ZH'>Zurich (ZH)</option>
+									</Field>
+								</div>
+								{touched.canton && errors.canton && (
+									<p className='help is-danger'>{errors.canton}</p>
+								)}
+							</div>
+
+							<div className='field'>
+								<label
+									htmlFor='hobbies'
+									className='label'
+								>
+									Hobbies
+								</label>
+								<div className='control'>
+									<Field
+										as='textarea'
+										name='hobbies'
+										cols='5'
+										rows='5'
+										id='hobbies'
+										placeholder='My hobbies are...'
+										className={cn('textarea', {
+											'is-danger': touched.hobbies && errors.hobbies,
+										})}
+									/>
+								</div>
+								{touched.hobbies && errors.hobbies && (
+									<p className='help is-danger'>{errors.hobbies}</p>
+								)}
+							</div>
+
+							<div class='btn-container'>
+								<div className='field'>
+									<button
+										type='submit'
+										className={cn('button is-success has-text-weight-bold', {
+											'is-loading': isSubmitting,
+										})}
+										disabled={
+											isSubmitting ||
+											errors.email ||
+											errors.password ||
+											errors.name ||
+											errors.surname
+										}
+									>
+										Sign up
+									</button>
+								</div>
+							</div>
+						</section>
+						<p>
+							Already have an account? <Link to='/login'>Log in</Link>{' '}
+						</p>
 					</Form>
 				)}
 			</Formik>
