@@ -61,7 +61,7 @@ header a img {
   padding: 0 1em;
 }
 
-.header-content li {
+.header-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -80,14 +80,18 @@ nav ul {
 
 nav li button {
   background: #6c4c9a;
-  color: #fff;
   border-radius: 0.8rem;
   border: none;
-  padding: 0.5rem 3rem;
+  padding: 0.5rem 2rem;
 }
+
+nav li button a {
+  color: #fff;
+}
+
 nav a {
   text-decoration: none;
-  color: #fff;
+  color: #000000;
 }
 
 .nav-toggle {
@@ -128,16 +132,18 @@ main section {
   header nav ul {
     display: none;
     flex-direction: column;
-    background: #444;
+    background: #d5d4d5;
+    padding: 20px;
     position: absolute;
     top: 60px;
     right: 0;
-    width: 200px;
+    width: 200px;   
+    gap: 1rem;
 }
 
   .nav-list.open {
       display: flex;
-  }
+   }
 
   .nav-toggle {
       display: block;
