@@ -1,7 +1,14 @@
 import { httpClient } from '../http/httpClient.js';
 
 function getAll() {
-  return httpClient.get('/users')
+  return httpClient.get('/users');
 }
 
-export const userService = { getAll };
+function getByEmail(email) {
+  return getAll().then(response => {
+    const users = response.data;
+    return users.find(user => user.email === email);
+  });
+}
+
+export const userService = { getAll, getByEmail };

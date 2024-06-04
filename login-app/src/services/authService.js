@@ -28,11 +28,16 @@ function register({
 	});
 }
 
-function login({ email, password }) {
-	return authClient.post('/login', { email, password });
+async function login({ email, password }) {
+  const response = await authClient.post('/login', { email, password });
+  localStorage.setItem('userEmail', email);
+  console.log(localStorage)
+  
+  return response;
 }
 
 function logout() {
+  localStorage.removeItem('userEmail');
 	return authClient.post('/logout');
 }
 

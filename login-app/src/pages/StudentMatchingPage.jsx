@@ -3,6 +3,8 @@ import { userService } from '../services/userService.js';
 import '../styles.css';
 import { usePageError } from '../hooks/usePageError.js';
 import { cantonMap } from '../utils/cantonMap.js';
+import { UsersPage } from './UsersPage.jsx';
+import { Link } from 'react-router-dom';
 
 const LanguageSelector = ({ changeCanton, changeGender, changeLanguage }) => {
 	const handleCantonChange = (event) => {
