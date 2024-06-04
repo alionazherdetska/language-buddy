@@ -73,7 +73,7 @@ export const RegistrationPage = () => {
 					name: '',
 					surname: '',
 					buddyType: '',
-					hobbies: '',
+					bio: '',
 					countryOfOrigin: '',
 					languagesToLearn: '',
 					canton: '',
@@ -125,7 +125,7 @@ export const RegistrationPage = () => {
 						surname,
 						motherTongue,
 						buddyType,
-						hobbies,
+						bio,
 						countryOfOrigin,
 						languagesToLearn,
 						canton,
@@ -141,7 +141,7 @@ export const RegistrationPage = () => {
 						name,
 						surname,
 						buddyType,
-						hobbies,
+						bio,
 						motherTongue: buddyType === 'teacher' ? motherTongue : 'German',
 						languagesToLearn:
 							buddyType === 'student' ? languagesToLearn : 'German',
@@ -540,26 +540,26 @@ export const RegistrationPage = () => {
 
 							<div className='field'>
 								<label
-									htmlFor='hobbies'
+									htmlFor='bio'
 									className='label'
 								>
-									Hobbies
+									Bio
 								</label>
 								<div className='control'>
 									<Field
 										as='textarea'
-										name='hobbies'
+										name='bio'
 										cols='5'
 										rows='5'
-										id='hobbies'
-										placeholder='My hobbies are...'
+										id='bio'
+										placeholder='I am...'
 										className={cn('textarea', {
-											'is-danger': touched.hobbies && errors.hobbies,
+											'is-danger': touched.bio && errors.bio,
 										})}
 									/>
 								</div>
-								{touched.hobbies && errors.hobbies && (
-									<p className='help is-danger'>{errors.hobbies}</p>
+								{touched.bio && errors.bio && (
+									<p className='help is-danger'>{errors.bio}</p>
 								)}
 							</div>
 

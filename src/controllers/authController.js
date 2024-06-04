@@ -110,9 +110,9 @@ function validateMotherTongue(value) {
 	}
 }
 
-function validateHobbies(value) {
+function validateBio(value) {
 	if (value && value.length < 3) {
-		return 'Hobbies should be at least 3 characters';
+		return 'Bio should be at least 10 characters';
 	}
 }
 
@@ -134,7 +134,7 @@ async function register(req, res, next) {
 		email,
 		password,
 		name,
-    hobbies,
+    bio,
     gender,
 		surname,
     motherTongue,
@@ -154,7 +154,7 @@ async function register(req, res, next) {
 		languagesToLearn: validateLanguagesToLearn(languagesToLearn),
 		canton: validateCanton(canton),
     motherTongue: validateMotherTongue(motherTongue),
-    hobbies: validateHobbies(hobbies),
+    bio: validateBio(bio),
     gender: validateGender(gender),
 	};
 
@@ -166,7 +166,7 @@ async function register(req, res, next) {
     errors.gender ||
 		errors.buddyType ||
 		errors.canton ||
-    errors.hobbies ||
+    errors.bio ||
 		errors.languagesToLearn ||
     errors.motherTongue ||
 		errors.countryOfOrigin
@@ -180,7 +180,7 @@ async function register(req, res, next) {
 		name,
     gender,
 		surname,
-    hobbies,
+    bio,
 		countryOfOrigin,
 		buddyType,
     motherTongue,

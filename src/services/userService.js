@@ -28,7 +28,7 @@ function normalize({
 	languagesToLearn,
 	buddyType,
 	motherTongue,
-  hobbies,
+  bio,
   countryOfOrigin,
 }) {
 	return {
@@ -41,7 +41,7 @@ function normalize({
 		languagesToLearn,
 		buddyType,
 		motherTongue,
-    hobbies,
+    bio,
     countryOfOrigin,
 	};
 }
@@ -55,7 +55,7 @@ async function register({
 	countryOfOrigin,
 	buddyType,
 	motherTongue,
-	hobbies,
+	bio,
 	languagesToLearn,
 	canton,
 }) {
@@ -80,7 +80,7 @@ async function register({
 		countryOfOrigin,
 		buddyType,
 		motherTongue,
-		hobbies,
+		bio,
 		languagesToLearn,
 		canton,
 	});

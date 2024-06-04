@@ -81,8 +81,8 @@ export const User = sequelize.define('user', {
 		),
 		allowNull: true,
 	},
-	hobbies: {
-		type: DataTypes.STRING,
+	bio: {
+		type: DataTypes.TEXT,
 		allowNull: true,
 	},
   gender: {
