@@ -83,6 +83,7 @@ nav li button {
   border-radius: 0.8rem;
   border: none;
   padding: 0.5rem 2rem;
+  cursor: pointer;
 }
 
 nav li button a {
@@ -100,6 +101,10 @@ nav a {
   background: none;
   border: none;
   color: #000;
+}
+
+li button {
+  color: white;
 }
 
 main {
@@ -330,6 +335,12 @@ footer button, #hero button {
   font-weight: bold;
   cursor: pointer;
 }
+
+footer button a {
+  text-decoration: none;
+  color: white;
+}
+
 footer .icons {
   display: flex;
   flex-direction: row;
