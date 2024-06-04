@@ -69,7 +69,7 @@ export const User = sequelize.define('user', {
 			'English',
 			'Swiss German'
 		),
-		allowNull: false,
+		allowNull: true,
 	},
 	motherTongue: {
 		type: DataTypes.STRING,
