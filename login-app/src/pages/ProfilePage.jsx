@@ -1,12 +1,55 @@
+import { useEffect, useState } from 'react';
 import '../styles.css';
+import { userService } from '../services/userService';
+import { usePageError } from '../hooks/usePageError';
+import { languageMapping } from '../utils/languageMapping';
 
 export const ProfilePage = () => {
+	const email = localStorage.getItem('userEmail');
+	const [error, setError] = usePageError('');
+	const [user, setUser] = useState(null);
+	const [loading, setLoading] = useState(false);
+
+console.log(email)
+	useEffect(() => {
+		userService
+			.getAll()
+			.then((fetchedUsers) => {
+        console.log(fetchedUsers)
+				const foundUser = fetchedUsers.find((user) => user.email === email);
+				setUser(foundUser);
+				setLoading(false);
+			})
+			.catch((error) => {
+				setError(error.message);
+				setLoading(false);
+			});
+	}, [email, setError]);
+
+	if (loading) {
+		return <div>Loading...</div>;
+	}
+
+	if (error) {
+		return <div>Error: {error}</div>;
+	}
+
+	if (!user) {
+		return <div>User not found</div>;
+	}
+
+	const languageToLearn = user.languagesToLearn;
+	const languageCode = languageMapping[languageToLearn] || languageToLearn;
+	const flagSrc = `../images/flags/${languageCode}.svg`;
+
 	return (
 		<div>
 			<main>
 				<div className='content'>
 					<section id='user'>
-						<h1 className='username'>Layla Hamidi</h1>
+						<h1 className='username'>
+							{user.name} {user.surname}
+						</h1>
 						<img
 							className='user_avatar'
 							src='../images/user_photo.jpg'
@@ -18,22 +61,23 @@ export const ProfilePage = () => {
 							<h2>Personal information</h2>
 							<ul>
 								<li>
-									<strong>Name:</strong> Layla
+									<strong>Name:</strong>
+									{user.name}
 								</li>
 								<li>
-									<strong>Surname:</strong> Hamidi
+									<strong>Surname:</strong> {user.surname}
 								</li>
 								<li>
-									<strong>Country of origin:</strong> Syria
+									<strong>Country of origin:</strong> {user.countryOfOrigin}
 								</li>
 								<li>
-									<strong>Canton:</strong> Bern
+									<strong>Canton:</strong> {user.canton}
 								</li>
 								<li>
-									<strong>Mother tongue:</strong> Arabic
+									<strong>Mother tongue:</strong> {user.motherTongue}
 								</li>
 								<li>
-									<strong>Hobbies:</strong> Skiing
+									<strong>Hobbies:</strong> {user.hobbies}
 								</li>
 							</ul>
 						</section>
@@ -62,20 +106,8 @@ export const ProfilePage = () => {
 						<ul>
 							<li>
 								<img
-									src='../images/flags/de.svg'
-									alt='German'
-								/>
-							</li>
-							<li>
-								<img
-									src='../images/flags/it.svg'
-									alt='Italian'
-								/>
-							</li>
-							<li>
-								<img
-									src='../images/flags/fr.svg'
-									alt='French'
+									src={flagSrc}
+									alt={languageToLearn}
 								/>
 							</li>
 						</ul>
