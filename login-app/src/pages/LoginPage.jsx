@@ -54,7 +54,7 @@ export const LoginPage = () => {
 				}}
 			>
 				{({ touched, errors, isSubmitting }) => (
-					<Form className='box'>
+					<Form className='registrationForm'>
 						<h1 className='title'>Log in</h1>
 						<div className='field'>
 							<label
@@ -64,7 +64,7 @@ export const LoginPage = () => {
 								Email
 							</label>
 
-							<div className='control has-icons-left has-icons-right'>
+							<div className='input-field'>
 								<Field
 									validate={validateEmail}
 									name='email'
@@ -99,7 +99,7 @@ export const LoginPage = () => {
 								Password
 							</label>
 
-							<div className='control has-icons-left has-icons-right'>
+							<div className='input-field'>
 								<Field
 									validate={validatePassword}
 									name='password'
@@ -122,10 +122,8 @@ export const LoginPage = () => {
 								)}
 							</div>
 
-							{touched.password && errors.password ? (
+							{touched.password && errors.password && (
 								<p className='help is-danger'>{errors.password}</p>
-							) : (
-								<p className='help'>At least 6 characters</p>
 							)}
 						</div>
 						<div className='field'>
@@ -139,7 +137,7 @@ export const LoginPage = () => {
 								Log in
 							</button>
 						</div>
-						Do not have an account? <Link to='/sign-up'>Sign up</Link>
+						Do not have an account?<Link to='/sign-up'>Sign up</Link>
 					</Form>
 				)}
 			</Formik>
