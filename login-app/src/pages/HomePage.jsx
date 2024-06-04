@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 const HomePage = () => {
   return (
-    <main>
       <div className="content">
         <section id="hero">
           <section>
@@ -75,7 +74,6 @@ const HomePage = () => {
           </div>
         </section>
       </div>
-    </main>
   );
 };
 
