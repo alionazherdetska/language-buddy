@@ -27,7 +27,7 @@ export const UsersPage = () => {
 						<p>Surname: {user.surname}</p>
 						<p>Mother Tongue: {user.motherTongue}</p>
 						<p>Buddy Type: {user.buddyType}</p>
-						<p>Hobbies: {user.hobbies}</p>
+						<p>Bio: {user.bio}</p>
 						<p>Country of Origin: {user.countryOfOrigin}</p>
 						<p>Languages to Learn: {user.languagesToLearn}</p>
 						<p>Canton: {user.canton}</p>

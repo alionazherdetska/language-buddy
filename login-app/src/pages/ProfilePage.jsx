@@ -77,7 +77,7 @@ console.log(email)
 									<strong>Mother tongue:</strong> {user.motherTongue}
 								</li>
 								<li>
-									<strong>Hobbies:</strong> {user.hobbies}
+									<strong>Bio:</strong> {user.bio}
 								</li>
 							</ul>
 						</section>
@@ -143,7 +143,7 @@ console.log(email)
 										<strong>Email:</strong> dan@danov.cvp
 									</li>
 									<li>
-										<strong>Hobbies:</strong> Skiing
+										<strong>Bio:</strong> I am an outgoing person
 									</li>
 								</ul>
 							</li>
@@ -175,7 +175,7 @@ console.log(email)
 										<strong>Email:</strong> olivia@example.cvp
 									</li>
 									<li>
-										<strong>Hobbies:</strong> diving
+										<strong>Bio:</strong> I like 
 									</li>
 								</ul>
 							</li>
@@ -207,7 +207,7 @@ console.log(email)
 										<strong>Email:</strong> stefan@liber.cvp
 									</li>
 									<li>
-										<strong>Hobbies:</strong> Food
+										<strong>Bio:</strong> I love languages
 									</li>
 								</ul>
 							</li>
@@ -239,7 +239,7 @@ console.log(email)
 										<strong>Email:</strong> melanie@oko.cvp
 									</li>
 									<li>
-										<strong>Hobbies:</strong> Hiking
+										<strong>Bio:</strong> Hiking
 									</li>
 								</ul>
 							</li>
