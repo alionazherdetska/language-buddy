@@ -54,7 +54,7 @@ export const RegistrationPage = () => {
 
 	if (registered) {
 		return (
-			<section className=''>
+			<section className='content'>
 				<h1 className='title'>Check your email</h1>
 				<p>We have sent you an email with the activation link</p>
 			</section>
