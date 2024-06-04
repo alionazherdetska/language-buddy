@@ -522,3 +522,75 @@ width: 1.5rem;
   text-align: center;
 }
 /* what is buddly end */
+/* forms */
+/* we should give the same for all  */
+input[type=email],
+input[type=password],
+input[type=text],
+input[type=tel],
+textarea,
+select {
+    margin: 10px 10px 15px 0;
+    width: 100%;
+    min-height: 2.5em;
+    padding: 10px;
+    border: 1px solid #e3e1fd;
+    color: black;
+}
+
+
+button {
+  background: #000;
+  color: #fff;
+  border-radius: 0.8rem;
+  border: none;
+  padding: 0.5rem 3rem;
+  cursor: pointer;
+}
+
+
+/* signup/registerpage */
+.step {
+  display: none;
+}
+
+.step.active {
+  display: block;
+}
+
+.step h2 {
+ display: flex;
+ justify-content: center;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
+.langOps {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.langOps label {
+  margin-bottom: 10px;
+}
+
+.option {
+  display: block;
+  padding: 10px;
+  border: 2px solid #e3e1fd;
+  margin: 5px;
+  color: black;
+  border-radius: 5px;
+}
+
+.optionslang {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px; /* Add some space between the options */
+}
