@@ -51,6 +51,7 @@ const validateSurname = (value) => {
 export const RegistrationPage = () => {
 	const [error, setError] = usePageError('');
 	const [registered, setRegistered] = useState(false);
+	const [buddyType, setBuddyType] = useState('');
 
 	if (registered) {
 		return (
@@ -77,6 +78,44 @@ export const RegistrationPage = () => {
 					canton: '',
 					gender: '',
 				}}
+				validate={(values) => {
+					const errors = {};
+
+					const emailError = validateEmail(values.email);
+					if (emailError) errors.email = emailError;
+
+					const passwordError = validatePassword(values.password);
+					if (passwordError) errors.password = passwordError;
+
+					const nameError = validateName(values.name);
+					if (nameError) errors.name = nameError;
+
+					const surnameError = validateSurname(values.surname);
+					if (surnameError) errors.surname = surnameError;
+
+					if (!values.buddyType) {
+						errors.buddyType = 'Buddy Type is required';
+					}
+
+					if (values.buddyType === 'teacher') {
+						if (!values.motherTongue) {
+							errors.motherTongue = 'Mother Tongue is required';
+						}
+					}
+
+					if (values.buddyType === 'student') {
+						if (!values.languagesToLearn) {
+							errors.languagesToLearn =
+								'Languages to Learn';
+						}
+					}
+
+					if (!values.canton) {
+						errors.canton = 'Canton is required';
+					}
+
+					return errors;
+				}}
 				validateOnMount={true}
 				onSubmit={(
 					{
@@ -96,20 +135,23 @@ export const RegistrationPage = () => {
 				) => {
 					formikHelpers.setSubmitting(true);
 
+					const payload = {
+						email,
+						password,
+						name,
+						surname,
+						buddyType,
+						hobbies,
+						motherTongue: buddyType === 'teacher' ? motherTongue : 'N/A',
+						languagesToLearn:
+							buddyType === 'student' ? languagesToLearn : 'German',
+						countryOfOrigin,
+						canton,
+						gender,
+					};
+
 					authService
-						.register({
-							email,
-							password,
-							name,
-							surname,
-							buddyType,
-							hobbies,
-							motherTongue,
-							countryOfOrigin,
-							languagesToLearn,
-							canton,
-							gender,
-						})
+						.register(payload)
 						.then(() => {
 							setRegistered(true);
 						})
@@ -138,7 +180,7 @@ export const RegistrationPage = () => {
 						});
 				}}
 			>
-				{({ touched, errors, isSubmitting }) => (
+				{({ touched, errors, isSubmitting, setFieldValue }) => (
 					<Form className='box'>
 						<h1 className='title'>Sign up</h1>
 						<div className='field'>
@@ -303,6 +345,11 @@ export const RegistrationPage = () => {
 											name='buddyType'
 											id='buddyType'
 											className='select'
+											onChange={(e) => {
+												setFieldValue('buddyType', e.target.value);
+												setBuddyType(e.target.value);
+                        console.log(e.target.value)
+											}}
 										>
 											<option value=''>Select Buddy Type</option>
 											<option value='student'>Student</option>
@@ -314,60 +361,67 @@ export const RegistrationPage = () => {
 									)}
 								</div>
 
-								<div className='field'>
-									<label
-										htmlFor='languagesToLearn'
-										className='label'
-									>
-										Languages to learn
-									</label>
-									<div className='control'>
-										<Field
-											as='select'
-											name='languagesToLearn'
-											id='languagesToLearn'
-											required
-											className={cn('select', {
-												'is-danger':
-													touched.languagesToLearn && errors.languagesToLearn,
-											})}
+								{/* Conditionally render the fields based on buddyType */}
+								{buddyType === 'student' && (
+									<div className='field'>
+										<label
+											htmlFor='languagesToLearn'
+											className='label'
 										>
-											<option value=''>Select Languages to Learn</option>
-											<option value='German'>German</option>
-											<option value='French'>French</option>
-											<option value='Italian'>Italian</option>
-											<option value='English'>English</option>
-											<option value='Swiss German'>Swiss German</option>
-										</Field>
+											Languages to learn
+										</label>
+										<div className='control'>
+											<Field
+												as='select'
+												name='languagesToLearn'
+												id='languagesToLearn'
+												required
+												className={cn('select', {
+													'is-danger':
+														touched.languagesToLearn && errors.languagesToLearn,
+												})}
+											>
+												<option value=''>Select Languages to Learn</option>
+												<option value='German'>German</option>
+												<option value='French'>French</option>
+												<option value='Italian'>Italian</option>
+												<option value='English'>English</option>
+												<option value='Swiss German'>Swiss German</option>
+											</Field>
+										</div>
+										{touched.languagesToLearn && errors.languagesToLearn && (
+											<p className='help is-danger'>
+												{errors.languagesToLearn}
+											</p>
+										)}
 									</div>
-									{touched.languagesToLearn && errors.languagesToLearn && (
-										<p className='help is-danger'>{errors.languagesToLearn}</p>
-									)}
-								</div>
+								)}
 
-								<div className='field'>
-									<label
-										htmlFor='motherTongue'
-										className='label'
-									>
-										Mother Tongue
-									</label>
-									<div className='control'>
-										<Field
-											name='motherTongue'
-											type='text'
-											id='motherTongue'
-											placeholder='e.g. English'
-											className={cn('input', {
-												'is-danger':
-													touched.motherTongue && errors.motherTongue,
-											})}
-										/>
+								{buddyType === 'teacher' && (
+									<div className='field'>
+										<label
+											htmlFor='motherTongue'
+											className='label'
+										>
+											Mother Tongue
+										</label>
+										<div className='control'>
+											<Field
+												name='motherTongue'
+												type='text'
+												id='motherTongue'
+												placeholder='e.g. English'
+												className={cn('input', {
+													'is-danger':
+														touched.motherTongue && errors.motherTongue,
+												})}
+											/>
+										</div>
+										{touched.motherTongue && errors.motherTongue && (
+											<p className='help is-danger'>{errors.motherTongue}</p>
+										)}
 									</div>
-									{touched.motherTongue && errors.motherTongue && (
-										<p className='help is-danger'>{errors.motherTongue}</p>
-									)}
-								</div>
+								)}
 
 								<div className='field'>
 									<label
