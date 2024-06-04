@@ -55,15 +55,15 @@ function App() {
 						</button>
 						<ul className={`nav-list ${isNavOpen ? 'open' : ''}`}>
 							<li>
-								<NavLink to='#'>Home</NavLink>
+								<NavLink to='/'>Home</NavLink>
 							</li>
 							{user && (
 								<>
 									<li>
-										<NavLink to='#'>Find your Buddy</NavLink>
+										<NavLink to='/student-matching'>Find your Buddy</NavLink>
 									</li>
 									<li>
-										<NavLink to='#'>Profile</NavLink>
+										<NavLink to='/profile'>Profile</NavLink>
 									</li>
 								</>
 							)}
