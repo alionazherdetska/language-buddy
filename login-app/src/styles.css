@@ -551,7 +551,7 @@ select {
 
 
 button {
-  background: #000;
+  background: #6c4c9a;
   color: #fff;
   border-radius: 0.8rem;
   border: none;
@@ -581,13 +581,25 @@ button {
 }
 
 .registrationForm {
+  display: flex;
   background-color: #fff;
+  width: 1170px;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
   padding: 1rem;
+}
+
+.input-field {
+  width: 30rem;
+}
+
+.section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .formh{

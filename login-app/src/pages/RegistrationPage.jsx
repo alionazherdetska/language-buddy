@@ -196,7 +196,7 @@ export const RegistrationPage = () => {
 								Name
 							</label>
 
-							<div className='control has-icons-left has-icons-right'>
+							<div className='input-field'>
 								<Field
 									validate={validateName}
 									name='name'
@@ -231,7 +231,7 @@ export const RegistrationPage = () => {
 									Surname
 								</label>
 
-								<div className='control has-icons-left has-icons-right'>
+								<div>
 									<Field
 										validate={validateSurname}
 										name='surname'
@@ -290,7 +290,7 @@ export const RegistrationPage = () => {
 									Email
 								</label>
 
-								<div className='control has-icons-left has-icons-right'>
+								<div>
 									<Field
 										validate={validateEmail}
 										name='email'
@@ -325,7 +325,7 @@ export const RegistrationPage = () => {
 									Password
 								</label>
 
-								<div className='control has-icons-left has-icons-right'>
+								<div>
 									<Field
 										validate={validatePassword}
 										name='password'
@@ -398,7 +398,7 @@ export const RegistrationPage = () => {
 							</div>
 
 							{buddyType === 'student' && (
-								<div className='field'>
+								<div className= 'input-field' >
 									<label
 										htmlFor='languagesToLearn'
 										className='label'
@@ -431,7 +431,7 @@ export const RegistrationPage = () => {
 							)}
 
 							{buddyType === 'teacher' && (
-								<div className='field'>
+								<div className= 'input-field'>
 									<label
 										htmlFor='motherTongue'
 										className='label'
@@ -463,7 +463,7 @@ export const RegistrationPage = () => {
 								</div>
 							)}
 
-							<div className='field'>
+							<div className='input-field'>
 								<label
 									htmlFor='countryOfOrigin'
 									className='label'
@@ -567,9 +567,6 @@ export const RegistrationPage = () => {
 								<div className='field'>
 									<button
 										type='submit'
-										className={cn('button is-success has-text-weight-bold', {
-											'is-loading': isSubmitting,
-										})}
 										disabled={
 											isSubmitting ||
 											errors.email ||
