@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import { AuthContext } from '../components/AuthContext.jsx';
 import { Loader } from '../components/Loader.jsx';
@@ -26,16 +26,21 @@ export const AccountActivationPage = () => {
 	}
 
 	return (
-		<>
-			<h1 className='title'>Account activation</h1>
+		<section className='succesfulRegistration'>
+			<h1>Account activation</h1>
 
 			{error ? (
 				<p className='notification is-danger is-light'>{error}</p>
 			) : (
-				<p className='notification is-success is-light'>
-					Your account is now active
-				</p>
+				<>
+					<p className='notification is-success is-light'>
+						Your account is now active
+					</p>
+					<button>
+						<Link to='/login'>Log in</Link>
+					</button>
+				</>
 			)}
-		</>
+		</section>
 	);
 };
