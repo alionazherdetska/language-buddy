@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize';
 
 // Get the password from the environment variables
-const password = 'test' || '';
+const password = 'postgres' || '';
 
 // Modify the password if it's empty
 const modifiedPassword = password.length === 0 ? ' ' : password;
