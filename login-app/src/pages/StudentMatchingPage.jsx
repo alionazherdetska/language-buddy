@@ -13,41 +13,53 @@ const LanguageSelector = ({ changeCanton, changeGender, changeLanguage }) => {
 		changeCanton(selectedCantonAbbreviation);
 	};
 
-  const handleGenderChange = (event) => {
-    const selectedGender = event.target.value;
-    changeGender(selectedGender);
-  }
+	const handleGenderChange = (event) => {
+		const selectedGender = event.target.value;
+		changeGender(selectedGender);
+	}
 
-  const handleLanguageChange = (lang) => {
-    changeLanguage(lang);
-  }
+	const handleLanguageChange = (lang) => {
+		changeLanguage(lang);
+	}
 
 	return (
 		<section id='user_languages'>
 			<h2>Select your language</h2>
 			<ul>
-      <li onClick={() => handleLanguageChange('German')}>
+				<li onClick={() => handleLanguageChange('All')}>
+					<img
+						src='../images/flags/chall.svg'
+						alt='All four languages'
+					/>
+				</li>
+				<li onClick={() => handleLanguageChange('German')}>
 					<img
 						src='../images/flags/de.svg'
-						alt='German'
+						alt='Flag of Germany'
 					/>
 				</li>
-        <li onClick={() => handleLanguageChange('Italian')}>
+				<li onClick={() => handleLanguageChange('Italian')}>
 					<img
 						src='../images/flags/it.svg'
-						alt='Italian'
+						alt='Flag of Italy'
 					/>
 				</li>
-        <li onClick={() => handleLanguageChange('French')}>
+				<li onClick={() => handleLanguageChange('French')}>
 					<img
 						src='../images/flags/fr.svg'
-						alt='French'
+						alt='Flag of France'
 					/>
 				</li>
-        <li onClick={() => handleLanguageChange('Ukrainian')}>
+				<li onClick={() => handleLanguageChange('UK')}>
 					<img
-						src='../images/flags/ua.svg'
-						alt='Ukrainian'
+						src='../images/flags/gb.svg'
+						alt='Flag of Uk'
+					/>
+				</li>
+				<li onClick={() => handleLanguageChange('Swissgerman')}>
+					<img
+						src='../images/flags/ch.svg'
+						alt='Flag of Uk'
 					/>
 				</li>
 			</ul>
@@ -62,7 +74,7 @@ const LanguageSelector = ({ changeCanton, changeGender, changeLanguage }) => {
 						name='gender'
 						onChange={handleGenderChange}
 					>
-            <option value=''>Select the gender</option>
+						<option value=''>Select the gender</option>
 						<option value='male'>Male</option>
 						<option value='female'>Female</option>
 						<option value='other'>Other</option>
@@ -129,16 +141,16 @@ const TeacherList = ({ selectedCanton, gender, language }) => {
 	}, []);
 
 	useEffect(() => {
-    const filtered = users.filter((teacher) => {
-        // Filter by selected canton if it's not empty
-        const filterByCanton = !selectedCanton || teacher.canton === selectedCanton;
-        // Filter by gender if it's not empty
-        const filterByGender = !gender || teacher.gender === gender;
-        const filterByLanguage = !language || teacher.motherTongue === language;
-        return filterByCanton && filterByGender && filterByLanguage;
-    });
-    setFilteredTeachers(filtered);
-}, [selectedCanton, gender, users, language]);
+		const filtered = users.filter((teacher) => {
+			// Filter by selected canton if it's not empty
+			const filterByCanton = !selectedCanton || teacher.canton === selectedCanton;
+			// Filter by gender if it's not empty
+			const filterByGender = !gender || teacher.gender === gender;
+			const filterByLanguage = !language || teacher.motherTongue === language;
+			return filterByCanton && filterByGender && filterByLanguage;
+		});
+		setFilteredTeachers(filtered);
+	}, [selectedCanton, gender, users, language]);
 
 
 	return (
@@ -185,7 +197,7 @@ const TeacherList = ({ selectedCanton, gender, language }) => {
 const StudentMatchingPage = () => {
 	const [selectedCanton, setSelectedCanton] = useState('');
 	const [gender, setGender] = useState('');
-  const [language, setLanguage] = useState('');
+	const [language, setLanguage] = useState('');
 
 	return (
 		<div>
@@ -195,12 +207,12 @@ const StudentMatchingPage = () => {
 					<LanguageSelector
 						changeCanton={setSelectedCanton}
 						changeGender={setGender}
-            changeLanguage={setLanguage}
+						changeLanguage={setLanguage}
 					/>
 					<TeacherList
 						selectedCanton={selectedCanton}
 						gender={gender}
-            language={language}
+						language={language}
 					/>
 				</div>
 			</main>
