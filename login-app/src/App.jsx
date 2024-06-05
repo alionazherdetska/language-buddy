@@ -86,14 +86,10 @@ function App() {
 							) : (
 								<>
 									<li>
-										<button>
 											<Link to='/sign-up'>Sign up</Link>
-										</button>
 									</li>
 									<li>
-										<button>
 											<Link to='/login'>Log in</Link>
-										</button>
 									</li>
 								</>
 							)}

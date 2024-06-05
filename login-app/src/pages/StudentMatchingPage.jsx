@@ -4,7 +4,6 @@ import '../styles.css';
 import { usePageError } from '../hooks/usePageError.js';
 import { cantonMap } from '../utils/cantonMap.js';
 
-
 const LanguageSelector = ({ changeCanton, changeGender, changeLanguage }) => {
 	const handleCantonChange = (event) => {
 		const selectedFullCanton = event.target.value;
@@ -16,17 +15,17 @@ const LanguageSelector = ({ changeCanton, changeGender, changeLanguage }) => {
 	const handleGenderChange = (event) => {
 		const selectedGender = event.target.value;
 		changeGender(selectedGender);
-	}
+	};
 
 	const handleLanguageChange = (lang) => {
 		changeLanguage(lang);
-	}
+	};
 
 	return (
 		<section id='user_languages'>
-			<h2>Select your language</h2>
+			<h2>First select your language</h2>
 			<ul>
-				<li onClick={() => handleLanguageChange('All')}>
+				<li onClick={() => handleLanguageChange(null)}>
 					<img
 						src='../images/flags/chall.svg'
 						alt='All four languages'
@@ -50,13 +49,13 @@ const LanguageSelector = ({ changeCanton, changeGender, changeLanguage }) => {
 						alt='Flag of France'
 					/>
 				</li>
-				<li onClick={() => handleLanguageChange('UK')}>
+				<li onClick={() => handleLanguageChange('English')}>
 					<img
 						src='../images/flags/gb.svg'
 						alt='Flag of Uk'
 					/>
 				</li>
-				<li onClick={() => handleLanguageChange('Swissgerman')}>
+				<li onClick={() => handleLanguageChange('Swiss German')}>
 					<img
 						src='../images/flags/ch.svg'
 						alt='Flag of Uk'
@@ -143,20 +142,21 @@ const TeacherList = ({ selectedCanton, gender, language }) => {
 	useEffect(() => {
 		const filtered = users.filter((teacher) => {
 			// Filter by selected canton if it's not empty
-			const filterByCanton = !selectedCanton || teacher.canton === selectedCanton;
+			const filterByCanton =
+				!selectedCanton || teacher.canton === selectedCanton;
 			// Filter by gender if it's not empty
 			const filterByGender = !gender || teacher.gender === gender;
-			const filterByLanguage = !language || teacher.motherTongue === language;
+			const filterByLanguage =
+				language === null || teacher.motherTongue === language;
 			return filterByCanton && filterByGender && filterByLanguage;
 		});
 		setFilteredTeachers(filtered);
 	}, [selectedCanton, gender, users, language]);
 
-
 	return (
 		<section id='user_teachers'>
-			<h2>List of Teachers</h2>
 			<ul>
+				<h2>List of Teachers</h2>
 				{filteredTeachers.map((teacher, index) => (
 					<li key={index}>
 						<img
