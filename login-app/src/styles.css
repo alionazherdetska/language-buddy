@@ -177,6 +177,7 @@ main section {
     display: block;
   }
 
+
   .header-content {
     flex-direction: row;
     align-items: center;
@@ -513,6 +514,19 @@ footer .icons img {
   background-color: white;
   position: relative;
   border-radius: 6px;
+  /* hover effects */
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+/* Hover effects */
+#how_it_works .timecontainer:hover .content {
+  border: 2px solid #6c4c9a;
+  background-color: #fff;
+}
+
+#how_it_works .timecontainer:hover::after {
+  border-color: #3f2a63;
 }
 
 /* Media queries - Responsive timeline on screens less than 600px wide */
