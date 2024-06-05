@@ -100,7 +100,7 @@ nav ul {
 nav li button {
   background: #6c4c9a;
   border-radius: 0.8rem;
-  border: none;
+  border: 1px solid transparent;
   padding: 0.5rem 2rem;
   cursor: pointer;
 }
@@ -385,13 +385,14 @@ footer button,
   background: #6c4c9a;
   color: #fff;
   border-radius: 0.8rem;
-  border: none;
+  border: 1px solid transparent;
   padding: 0.5rem 3rem;
   margin-top: 2rem;
   font-weight: bold;
   cursor: pointer;
 }
 
+footer button:hover,
 #hero button:hover {
   color: #6c4c9a;
   background-color: #fff;
@@ -633,7 +634,7 @@ button {
   background: #6c4c9a;
   color: #fff;
   border-radius: 0.8rem;
-  border: none;
+  border: 1px solid #6c4c9a;
   padding: 0.5rem 2rem;
   cursor: pointer;
 }
@@ -654,6 +655,7 @@ button:hover {
   border: 1px solid #6c4c9a;
   padding: 0.5rem 2rem;
   cursor: pointer;
+  font-weight: 600;
 
   a {
     text-decoration: none;
