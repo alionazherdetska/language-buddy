@@ -45,7 +45,7 @@ function App() {
 							alt='Buddy Logo'
 						/>
 					</a>
-					<nav className ='mobile-nav'>
+					<nav className='mobile-nav'>
 						<button
 							className='nav-toggle'
 							aria-label='Open Navigation Menu'
@@ -86,10 +86,10 @@ function App() {
 							) : (
 								<>
 									<li>
-											<Link to='/sign-up'>Sign up</Link>
+										<button><Link to='/sign-up'>Sign up</Link></button>
 									</li>
 									<li>
-											<Link to='/login'>Log in</Link>
+										<button><Link to='/login'>Log in</Link></button>
 									</li>
 								</>
 							)}
