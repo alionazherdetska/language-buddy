@@ -3,6 +3,7 @@ import { userService } from '../services/userService.js';
 import '../styles.css';
 import { usePageError } from '../hooks/usePageError.js';
 import { cantonMap } from '../utils/cantonMap.js';
+import { getRandomImage } from '../utils/getRandomAvatarImage.js';
 
 const LanguageSelector = ({ changeCanton, changeGender, changeLanguage }) => {
 	const handleCantonChange = (event) => {
@@ -160,7 +161,7 @@ const TeacherList = ({ selectedCanton, gender, language }) => {
 				{filteredTeachers.map((teacher, index) => (
 					<li key={index}>
 						<img
-							src='../images/teacher-1.jpg'
+							src={getRandomImage(teacher.gender)}
 							alt={teacher.name}
 						/>
 						<ul>
