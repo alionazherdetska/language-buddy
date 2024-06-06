@@ -13,7 +13,8 @@ export const ProfilePage = () => {
 	const [learningGoals, setLearningGoals] = useState('');
 	const [isEditing, setIsEditing] = useState(false);
 	const [buddyList, setBuddyList] = useState([]);
-
+  const [avatar, setAvatar] = useState(localStorage.getItem('avatar'));
+  const savedIds = localStorage.getItem('connectedTeachersId') || [];
 
 	useEffect(() => {
 		setLoading(true);
@@ -28,14 +29,20 @@ export const ProfilePage = () => {
 				);
 				const buddyTypeToFetch = foundUser.buddyType === 'teacher' ? 'student' : 'teacher';
 				const filteredBuddies = fetchedUsers.filter(user => user.buddyType === buddyTypeToFetch);
-				setBuddyList(filteredBuddies);
+				setBuddyList(filteredBuddies.filter(buddy => savedIds.includes(buddy.id)));
+        console.log(savedIds)
+        if (!avatar) {
+					const newAvatar = getRandomImage(foundUser.gender);
+					localStorage.setItem('avatar', newAvatar);
+					setAvatar(newAvatar);
+				}
 				setLoading(false);
 			})
 			.catch((error) => {
 				setError(error.message);
 				setLoading(false);
 			});
-	}, [email, setError]);
+	}, [email, setError, avatar]);
 
 	const handleEditClick = () => {
 		setIsEditing(true);
@@ -88,7 +95,7 @@ export const ProfilePage = () => {
 						<div className='user_image-section'>
 							<img
 								className='user_avatar'
-								src='../images/user_photo.jpg'
+								src={avatar}
 								alt='User Avatar'
 							/>
 							<button>Upload an image</button>
