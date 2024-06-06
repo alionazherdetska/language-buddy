@@ -127,15 +127,18 @@ export const LoginPage = () => {
 						<div className='field'>
 							<button
 								type='submit'
-								className={cn('button is-success has-text-weight-bold', {
-									'is-loading': isSubmitting,
-								})}
 								disabled={isSubmitting || errors.email || errors.password}
 							>
 								Log in
 							</button>
 						</div>
-						Do not have an account?<Link to='/sign-up'>Sign up</Link>
+						Do not have an account?
+						<Link
+							className='activation-link'
+							to='/sign-up'
+						>
+							Sign up
+						</Link>
 					</Form>
 				)}
 			</Formik>

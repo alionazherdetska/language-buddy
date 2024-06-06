@@ -593,7 +593,7 @@ export const RegistrationPage = () => {
 							</div>
 						</section>
 						<p>
-							Already have an account? <Link to='/login'>Log in</Link>{' '}
+							Already have an account? <Link className='activation-link' to='/login'>Log in</Link>{' '}
 						</p>
 					</Form>
 				)}

@@ -40,6 +40,10 @@ h6 {
   isolation: isolate;
 }
 
+li {
+  list-style: none;
+}
+
 /* end reset css */
 
 /* basic layout stuff start */
@@ -348,6 +352,11 @@ section ul {
 
 .user_teachers_list {
   justify-content: flex-start;
+}
+
+#user_teachers ul {
+  display: flex;
+  justify-content: space-between;
 }
 
 #user_teachers ul li {
@@ -767,6 +776,10 @@ button a {
   align-items: center;
   gap: 10px;
   padding: 1rem;
+}
+
+.activation-link {
+  color: #6c4c9a;
 }
 
 .succesfulRegistration h1 {
