@@ -36,9 +36,7 @@ export const AccountActivationPage = () => {
 					<p className='notification is-success is-light'>
 						Your account is now active
 					</p>
-					<button>
-						<Link to='/login'>Log in</Link>
-					</button>
+						<Link className='activation-link' to='/login'>Log in</Link>
 				</>
 			)}
 		</section>
