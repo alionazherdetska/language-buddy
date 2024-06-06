@@ -125,6 +125,10 @@ const TeacherList = ({ selectedCanton, gender, language }) => {
 	const [users, setUsers] = useState([]);
 	const [filteredTeachers, setFilteredTeachers] = useState([]);
 
+	const handleEmailClick = (email) => {
+		window.location.href = `mailto:${email}`;
+	};
+
 	useEffect(() => {
 		userService
 			.getAll()
@@ -181,10 +185,10 @@ const TeacherList = ({ selectedCanton, gender, language }) => {
 								<strong>Mother tongue:</strong> {teacher.motherTongue}
 							</li>
 							<li>
-								<strong>Email:</strong> {teacher.email}
+								<strong>Bio:</strong> {teacher.bio}
 							</li>
 							<li>
-								<strong>Bio:</strong> {teacher.bio}
+								<button className="btnmatch" onClick={() => handleEmailClick(teacher.email)}>Get this Buddly</button>
 							</li>
 						</ul>
 					</li>
