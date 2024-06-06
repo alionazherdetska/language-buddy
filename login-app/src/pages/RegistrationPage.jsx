@@ -196,7 +196,7 @@ export const RegistrationPage = () => {
 								Name
 							</label>
 
-							<div className='input-field'>
+							<div className='field control has-icons-left input-field'>
 								<Field
 									validate={validateName}
 									name='name'
@@ -223,15 +223,15 @@ export const RegistrationPage = () => {
 								<p className='help is-danger'>{errors.name}</p>
 							)}
 
-							<div className='field'>
+							<div className='field control has-icons-left'>
 								<label
 									htmlFor='surname'
-									className='label'
+									className='label is-small'
 								>
 									Surname
 								</label>
 
-								<div>
+								<div className="input-field control">
 									<Field
 										validate={validateSurname}
 										name='surname'
@@ -258,39 +258,40 @@ export const RegistrationPage = () => {
 									<p className='help is-danger'>{errors.surname}</p>
 								)}
 							</div>
-							<div className='field'>
+							<div className='input-field'>
 								<label
 									htmlFor='gender'
-									className='label'
+									className='label is-small'
 								>
 									Gender
 								</label>
 								<div className='control'>
-									<Field
-										as='select'
-										name='gender'
-										id='gender'
-										className='select'
-									>
-										<option value=''>Select Gender</option>
-										<option value='male'>Male</option>
-										<option value='female'>Female</option>
-										<option value='other'>Other</option>
-									</Field>
+									<span className='select input-field'>
+										<Field
+											as='select'
+											name='gender'
+											id='gender'
+											className='select'
+										>
+											<option value=''>Select Gender</option>
+											<option value='male'>Male</option>
+											<option value='female'>Female</option>
+											<option value='other'>Other</option>
+										</Field>
+									</span>
 								</div>
 								{touched.gender && errors.gender && (
 									<p className='help is-danger'>{errors.gender}</p>
 								)}
 							</div>
-							<div className='field'>
+							<div className='field control has-icons-left'>
 								<label
 									htmlFor='email'
-									className='label'
+									className='label is-small'
 								>
 									Email
 								</label>
-
-								<div>
+								<div className='input-field control'>
 									<Field
 										validate={validateEmail}
 										name='email'
@@ -301,11 +302,9 @@ export const RegistrationPage = () => {
 											'is-danger': touched.email && errors.email,
 										})}
 									/>
-
 									<span className='icon is-small is-left'>
 										<i className='fa fa-envelope'></i>
 									</span>
-
 									{touched.email && errors.email && (
 										<span className='icon is-small is-right has-text-danger'>
 											<i className='fas fa-exclamation-triangle'></i>
@@ -317,15 +316,14 @@ export const RegistrationPage = () => {
 									<p className='help is-danger'>{errors.email}</p>
 								)}
 							</div>
-							<div className='field'>
+							<div className='field control has-icons-left'>
 								<label
 									htmlFor='password'
-									className='label'
+									className='label is-small'
 								>
 									Password
 								</label>
-
-								<div>
+								<div className='input-field control'>
 									<Field
 										validate={validatePassword}
 										name='password'
@@ -336,11 +334,8 @@ export const RegistrationPage = () => {
 											'is-danger': touched.password && errors.password,
 										})}
 									/>
-									{touched.password && errors.password ? (
-										<p className='help is-danger'>{errors.password}</p>
-									) : (
-										<p className='help'>At least 6 characters</p>
-									)}
+									
+									
 
 									<span className='icon is-small is-left'>
 										<i className='fa fa-lock'></i>
@@ -352,7 +347,13 @@ export const RegistrationPage = () => {
 										</span>
 									)}
 								</div>
+								{touched.password && errors.password ? (
+										<p className='help is-danger'>{errors.password}</p>
+									) : (
+										<p className='help'>At least 6 characters</p>
+									)}
 							</div>
+
 						</section>
 						<div class='btn-container'>
 							<button
@@ -376,21 +377,23 @@ export const RegistrationPage = () => {
 									Buddy Type
 								</label>
 								<div className='control'>
-									<Field
-										as='select'
-										name='buddyType'
-										id='buddyType'
-										className='select'
-										onChange={(e) => {
-											setFieldValue('buddyType', e.target.value);
-											setBuddyType(e.target.value);
-											console.log(e.target.value);
-										}}
-									>
-										<option value=''>Select Buddy Type</option>
-										<option value='student'>Student</option>
-										<option value='teacher'>Teacher</option>
-									</Field>
+									<span className='select input-field'>
+										<Field
+											as='select'
+											name='buddyType'
+											id='buddyType'
+											className='select'
+											onChange={(e) => {
+												setFieldValue('buddyType', e.target.value);
+												setBuddyType(e.target.value);
+												console.log(e.target.value);
+											}}
+										>
+											<option value=''>Select Buddy Type</option>
+											<option value='student'>Student</option>
+											<option value='teacher'>Teacher</option>
+										</Field>
+									</span>
 								</div>
 								{touched.buddyType && errors.buddyType && (
 									<p className='help is-danger'>{errors.buddyType}</p>
@@ -398,7 +401,7 @@ export const RegistrationPage = () => {
 							</div>
 
 							{buddyType === 'student' && (
-								<div className= 'input-field' >
+								<div className='input-field' >
 									<label
 										htmlFor='languagesToLearn'
 										className='label'
@@ -406,23 +409,25 @@ export const RegistrationPage = () => {
 										Languages to learn
 									</label>
 									<div className='control'>
-										<Field
-											as='select'
-											name='languagesToLearn'
-											id='languagesToLearn'
-											required
-											className={cn('select', {
-												'is-danger':
-													touched.languagesToLearn && errors.languagesToLearn,
-											})}
-										>
-											<option value=''>Select Languages to Learn</option>
-											<option value='German'>German</option>
-											<option value='French'>French</option>
-											<option value='Italian'>Italian</option>
-											<option value='English'>English</option>
-											<option value='Swiss German'>Swiss German</option>
-										</Field>
+										<span className='select input-field'>
+											<Field
+												as='select'
+												name='languagesToLearn'
+												id='languagesToLearn'
+												required
+												className={cn('select', {
+													'is-danger':
+														touched.languagesToLearn && errors.languagesToLearn,
+												})}
+											>
+												<option value=''>Select Languages to Learn</option>
+												<option value='German'>German</option>
+												<option value='French'>French</option>
+												<option value='Italian'>Italian</option>
+												<option value='English'>English</option>
+												<option value='Swiss German'>Swiss German</option>
+											</Field>
+										</span>
 									</div>
 									{touched.languagesToLearn && errors.languagesToLearn && (
 										<p className='help is-danger'>{errors.languagesToLearn}</p>
@@ -431,7 +436,7 @@ export const RegistrationPage = () => {
 							)}
 
 							{buddyType === 'teacher' && (
-								<div className= 'input-field'>
+								<div className='input-field'>
 									<label
 										htmlFor='motherTongue'
 										className='label'
@@ -439,23 +444,25 @@ export const RegistrationPage = () => {
 										Mother Tongue
 									</label>
 									<div className='control'>
-										<Field
-											as='select'
-											name='motherTongue'
-											id='motherTongue'
-											required
-											className={cn('select', {
-												'is-danger':
-													touched.motherTongue && errors.motherTongue,
-											})}
-										>
-											<option value=''>Select your Mother Tongue</option>
-											<option value='German'>German</option>
-											<option value='French'>French</option>
-											<option value='Italian'>Italian</option>
-											<option value='English'>English</option>
-											<option value='Swiss German'>Swiss German</option>
-										</Field>
+										<span className='select input-field'>
+											<Field
+												as='select'
+												name='motherTongue'
+												id='motherTongue'
+												required
+												className={cn('select', {
+													'is-danger':
+														touched.motherTongue && errors.motherTongue,
+												})}
+											>
+												<option value=''>Select your Mother Tongue</option>
+												<option value='German'>German</option>
+												<option value='French'>French</option>
+												<option value='Italian'>Italian</option>
+												<option value='English'>English</option>
+												<option value='Swiss German'>Swiss German</option>
+											</Field>
+										</span>
 									</div>
 									{touched.motherTongue && errors.motherTongue && (
 										<p className='help is-danger'>{errors.motherTongue}</p>
@@ -463,10 +470,10 @@ export const RegistrationPage = () => {
 								</div>
 							)}
 
-							<div className='input-field'>
+							<div className='field control has-icons-left input-field'>
 								<label
 									htmlFor='countryOfOrigin'
-									className='label'
+									className='label '
 								>
 									Country of Origin
 								</label>
@@ -481,6 +488,9 @@ export const RegistrationPage = () => {
 												touched.countryOfOrigin && errors.countryOfOrigin,
 										})}
 									/>
+									<span className="icon is-small is-left">
+										<i className="fas fa-globe"></i>
+									</span>
 								</div>
 								{touched.countryOfOrigin && errors.countryOfOrigin && (
 									<p className='help is-danger'>{errors.countryOfOrigin}</p>
@@ -495,43 +505,45 @@ export const RegistrationPage = () => {
 									Canton
 								</label>
 								<div className='control'>
-									<Field
-										as='select'
-										name='canton'
-										id='canton'
-										required
-										className={cn('select', {
-											'is-danger': touched.canton && errors.canton,
-										})}
-									>
-										<option value=''>Select Canton</option>
-										<option value='AG'>Aargau (AG)</option>
-										<option value='AI'>Appenzell Innerrhoden (AI)</option>
-										<option value='AR'>Appenzell Ausserrhoden (AR)</option>
-										<option value='BE'>Bern (BE)</option>
-										<option value='BL'>Basel-Landschaft (BL)</option>
-										<option value='BS'>Basel-Stadt (BS)</option>
-										<option value='FR'>Fribourg (FR)</option>
-										<option value='GE'>Geneva (GE)</option>
-										<option value='GL'>Glarus (GL)</option>
-										<option value='GR'>Graubünden (GR)</option>
-										<option value='JU'>Jura (JU)</option>
-										<option value='LU'>Lucerne (LU)</option>
-										<option value='NE'>Neuchâtel (NE)</option>
-										<option value='NW'>Nidwalden (NW)</option>
-										<option value='OW'>Obwalden (OW)</option>
-										<option value='SG'>St. Gallen (SG)</option>
-										<option value='SH'>Schaffhausen (SH)</option>
-										<option value='SO'>Solothurn (SO)</option>
-										<option value='SZ'>Schwyz (SZ)</option>
-										<option value='TG'>Thurgau (TG)</option>
-										<option value='TI'>Ticino (TI)</option>
-										<option value='UR'>Uri (UR)</option>
-										<option value='VD'>Vaud (VD)</option>
-										<option value='VS'>Valais (VS)</option>
-										<option value='ZG'>Zug (ZG)</option>
-										<option value='ZH'>Zurich (ZH)</option>
-									</Field>
+									<span className='select input-field'>
+										<Field
+											as='select'
+											name='canton'
+											id='canton'
+											required
+											className={cn('select', {
+												'is-danger': touched.canton && errors.canton,
+											})}
+										>
+											<option value=''>Select Canton</option>
+											<option value='AG'>Aargau (AG)</option>
+											<option value='AI'>Appenzell Innerrhoden (AI)</option>
+											<option value='AR'>Appenzell Ausserrhoden (AR)</option>
+											<option value='BE'>Bern (BE)</option>
+											<option value='BL'>Basel-Landschaft (BL)</option>
+											<option value='BS'>Basel-Stadt (BS)</option>
+											<option value='FR'>Fribourg (FR)</option>
+											<option value='GE'>Geneva (GE)</option>
+											<option value='GL'>Glarus (GL)</option>
+											<option value='GR'>Graubünden (GR)</option>
+											<option value='JU'>Jura (JU)</option>
+											<option value='LU'>Lucerne (LU)</option>
+											<option value='NE'>Neuchâtel (NE)</option>
+											<option value='NW'>Nidwalden (NW)</option>
+											<option value='OW'>Obwalden (OW)</option>
+											<option value='SG'>St. Gallen (SG)</option>
+											<option value='SH'>Schaffhausen (SH)</option>
+											<option value='SO'>Solothurn (SO)</option>
+											<option value='SZ'>Schwyz (SZ)</option>
+											<option value='TG'>Thurgau (TG)</option>
+											<option value='TI'>Ticino (TI)</option>
+											<option value='UR'>Uri (UR)</option>
+											<option value='VD'>Vaud (VD)</option>
+											<option value='VS'>Valais (VS)</option>
+											<option value='ZG'>Zug (ZG)</option>
+											<option value='ZH'>Zurich (ZH)</option>
+										</Field>
+									</span>
 								</div>
 								{touched.canton && errors.canton && (
 									<p className='help is-danger'>{errors.canton}</p>

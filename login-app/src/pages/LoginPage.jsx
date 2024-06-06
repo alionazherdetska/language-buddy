@@ -56,15 +56,15 @@ export const LoginPage = () => {
 				{({ touched, errors, isSubmitting }) => (
 					<Form className='registrationForm'>
 						<h1 className='title'>Log in</h1>
-						<div className='field'>
+						<div className='field control has-icons-left'>
 							<label
 								htmlFor='email'
-								className='label'
+								className='label is-small'
 							>
 								Email
 							</label>
 
-							<div className='input-field'>
+							<div className='input-field control'>
 								<Field
 									validate={validateEmail}
 									name='email'
@@ -91,15 +91,15 @@ export const LoginPage = () => {
 								<p className='help is-danger'>{errors.email}</p>
 							)}
 						</div>
-						<div className='field'>
+						<div className='control has-icons-left input-field'>
 							<label
 								htmlFor='password'
-								className='label'
+								className='label is-small'
 							>
 								Password
 							</label>
 
-							<div className='input-field'>
+							<div className='input-field control'>
 								<Field
 									validate={validatePassword}
 									name='password'
@@ -114,14 +114,12 @@ export const LoginPage = () => {
 								<span className='icon is-small is-left'>
 									<i className='fa fa-lock'></i>
 								</span>
-
 								{touched.password && errors.password && (
 									<span className='icon is-small is-right has-text-danger'>
 										<i className='fas fa-exclamation-triangle'></i>
 									</span>
 								)}
 							</div>
-
 							{touched.password && errors.password && (
 								<p className='help is-danger'>{errors.password}</p>
 							)}
