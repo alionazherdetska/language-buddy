@@ -9,15 +9,21 @@ export const ProfilePage = () => {
 	const [error, setError] = usePageError('');
 	const [user, setUser] = useState(null);
 	const [loading, setLoading] = useState(false);
+	const [learningGoals, setLearningGoals] = useState('');
+	const [isEditing, setIsEditing] = useState(false);
 
-console.log(email)
+	console.log(email);
 	useEffect(() => {
 		userService
 			.getAll()
 			.then((fetchedUsers) => {
-        console.log(fetchedUsers)
+				console.log(fetchedUsers);
 				const foundUser = fetchedUsers.find((user) => user.email === email);
 				setUser(foundUser);
+				setLearningGoals(
+					foundUser.learningGoals ||
+						'Learn and use 50 essential German words and 20 basic phrases for everyday interactions (e.g., greetings, asking for directions, shopping). Form and understand simple sentences and questions, such as introducing oneself, talking about family, and asking basic questions. Understand basic spoken German in everyday contexts, such as greetings, simple instructions, and common phrases.'
+				);
 				setLoading(false);
 			})
 			.catch((error) => {
@@ -25,6 +31,30 @@ console.log(email)
 				setLoading(false);
 			});
 	}, [email, setError]);
+
+	const handleEditClick = () => {
+		setIsEditing(true);
+	};
+
+	const handleSaveClick = () => {
+		setIsEditing(false);
+		localStorage.setItem('learningGoals', learningGoals);
+	};
+
+	const handleChange = (event) => {
+		setLearningGoals(event.target.value);
+	};
+
+	const handleKeyDown = (event) => {
+		if (event.key === 'Enter' && !event.shiftKey) {
+			event.preventDefault();
+			handleSaveClick();
+		}
+	};
+
+	const handleBlur = () => {
+		handleSaveClick();
+	};
 
 	if (loading) {
 		return <div>Loading...</div>;
@@ -50,11 +80,14 @@ console.log(email)
 						<h1 className='username'>
 							{user.name} {user.surname}
 						</h1>
-						<img
-							className='user_avatar'
-							src='../images/user_photo.jpg'
-							alt='User Avatar'
-						/>
+						<div className='user_image-section'>
+							<img
+								className='user_avatar'
+								src='../images/user_photo.jpg'
+								alt='User Avatar'
+							/>
+							<button>Upload an image</button>
+						</div>
 					</section>
 					<section id='user_info'>
 						<section>
@@ -82,23 +115,42 @@ console.log(email)
 							</ul>
 						</section>
 						<section>
-							<h2>Learning Goals</h2>
-							<ul>
-								<li>
-									Learn and use 50 essential German words and 20 basic phrases
-									for everyday interactions (e.g., greetings, asking for
-									directions, shopping).
-								</li>
-								<li>
-									Form and understand simple sentences and questions, such as
-									introducing oneself, talking about family, and asking basic
-									questions.
-								</li>
-								<li>
-									Understand basic spoken German in everyday contexts, such as
-									greetings, simple instructions, and common phrases.
-								</li>
-							</ul>
+							{isEditing ? (
+								<>
+									<article>
+										<h2>Learning Goals</h2>
+										<img
+											onClick={handleSaveClick}
+											src='../images/save.png'
+											alt='Edit'
+										/>
+									</article>
+									<textarea
+										value={learningGoals}
+										onChange={handleChange}
+										onKeyDown={handleKeyDown}
+										onBlur={handleBlur}
+										rows='5'
+										cols='50'
+									/>
+								</>
+							) : (
+								<>
+									<article>
+										<h2>Learning Goals</h2>
+										<img
+											onClick={handleEditClick}
+											src='../images/edit.svg'
+											alt='Edit'
+										/>
+									</article>
+									<ul>
+										{learningGoals.split('\n').map((goal, index) => (
+											<li key={index}>{goal.trim()}</li>
+										))}
+									</ul>
+								</>
+							)}
 						</section>
 					</section>
 					<section id='user_languages'>
@@ -175,7 +227,7 @@ console.log(email)
 										<strong>Email:</strong> olivia@example.cvp
 									</li>
 									<li>
-										<strong>Bio:</strong> I like 
+										<strong>Bio:</strong> I like
 									</li>
 								</ul>
 							</li>
@@ -247,13 +299,6 @@ console.log(email)
 					</section>
 				</div>
 			</main>
-			<script>
-				{`const navToggle = document.querySelector('.nav-toggle');
-                const navList = document.querySelector('.nav-list');
-                navToggle.addEventListener('click', () => {
-                    navList.classList.toggle('open');
-                });`}
-			</script>
 		</div>
 	);
 };
