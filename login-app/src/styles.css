@@ -358,6 +358,7 @@ h1 {
   border-radius: 1rem;
   width: 40%;
   cursor: pointer;
+  height: 5rem;
 }
 
 section ul {
@@ -373,7 +374,7 @@ section ul {
 }
 
 #user_teachers ul li {
-  width: 24%;
+  width: 23%;
   padding: 0;
 }
 
@@ -394,6 +395,15 @@ section ul {
 
 #user_teachers ul li:nth-last-child(2) {
   margin-bottom: 1rem;
+  height: 13rem;
+  font-style: italic;
+}
+#user_teachers ul li:nth-last-child(6) {
+  height: 1.5rem; 
+}
+
+.content li+li {
+  margin:0 !important;
 }
 
 #user_teachers ul li ul li  {
@@ -759,6 +769,7 @@ button a {
 
 .btnmatch{
   align-self: flex-start;
+  margin: 0 auto;
 }
 
 .btnmatchhover, button:hover {
@@ -836,3 +847,4 @@ button a {
 .formh {
   text-align: center;
 }
+
