@@ -120,48 +120,54 @@ const LanguageSelector = ({ changeCanton, changeGender, changeLanguage }) => {
 	);
 };
 
-const TeacherList = ({ selectedCanton, gender, language }) => {
-	const [error, setError] = usePageError('');
-	const [users, setUsers] = useState([]);
+const TeacherList = ({ selectedCanton, gender, language, teachers, error }) => {
 	const [filteredTeachers, setFilteredTeachers] = useState([]);
+	const [connectedTeachersId, setConnectedTeachersId] = useState(() => {
+		const savedTeachersId = localStorage.getItem('connectedTeachersId');
+		return savedTeachersId ? JSON.parse(savedTeachersId) : [];
+	});
 
-	const handleEmailClick = (email) => {
-		window.location.href = `mailto:${email}`;
-	};
+	const handleEmailClick = (email, teacherId) => {
+		setConnectedTeachersId((prevConnectedTeachersId) => {
+      const updatedConnectedTeachersId = [
+        ...prevConnectedTeachersId,
+        teacherId,
+      ];
+      localStorage.setItem(
+        'connectedTeachersId',
+        JSON.stringify(updatedConnectedTeachersId)
+      );
+      return updatedConnectedTeachersId;
+    });
+    window.location.href = `mailto:${email}`;
+  };
+  
+	console.log(connectedTeachersId);
 
 	useEffect(() => {
-		userService
-			.getAll()
-			.then((data) => {
-				const teachers = data.filter((user) => user.buddyType === 'teacher');
-				setUsers(teachers);
-				setFilteredTeachers(teachers);
-				console.log(teachers);
-			})
-			.catch((error) => {
-				setError(error.message);
-				console.log(error);
+		// If no filter applied, render all teachers
+		if (!selectedCanton && !gender && !language) {
+			setFilteredTeachers(teachers);
+		} else {
+			// Apply filters
+			const filtered = teachers.filter((teacher) => {
+				// Filter by selected canton if it's not empty
+				const filterByCanton =
+					!selectedCanton || teacher.canton === selectedCanton;
+				// Filter by gender if it's not empty
+				const filterByGender = !gender || teacher.gender === gender;
+				const filterByLanguage =
+					language === null || teacher.motherTongue === language;
+				return filterByCanton && filterByGender && filterByLanguage;
 			});
-	}, []);
-
-	useEffect(() => {
-		const filtered = users.filter((teacher) => {
-			// Filter by selected canton if it's not empty
-			const filterByCanton =
-				!selectedCanton || teacher.canton === selectedCanton;
-			// Filter by gender if it's not empty
-			const filterByGender = !gender || teacher.gender === gender;
-			const filterByLanguage =
-				language === null || teacher.motherTongue === language;
-			return filterByCanton && filterByGender && filterByLanguage;
-		});
-		setFilteredTeachers(filtered);
-	}, [selectedCanton, gender, users, language]);
+			setFilteredTeachers(filtered);
+		}
+	}, [selectedCanton, gender, teachers, language]);
 
 	return (
 		<section id='user_teachers'>
-			<ul>
-				<h2>List of Teachers</h2>
+			<h2>List of Teachers</h2>
+			<ul className={filteredTeachers.length % 4 === 0 ? '' : 'user_teachers_list'}>
 				{filteredTeachers.map((teacher, index) => (
 					<li key={index}>
 						<img
@@ -187,9 +193,16 @@ const TeacherList = ({ selectedCanton, gender, language }) => {
 							<li>
 								<strong>Bio:</strong> {teacher.bio}
 							</li>
-							<li>
-								<button className="btnmatch" onClick={() => handleEmailClick(teacher.email)}>Get this Buddly</button>
-							</li>
+
+							<button
+								className={connectedTeachersId.includes(teacher.id) ? 'btnmatchhover' :'btnmatch'}
+								onClick={() => handleEmailClick(teacher.email, teacher.id)}
+								disabled={connectedTeachersId.includes(teacher.id)}
+							>
+								{connectedTeachersId.includes(teacher.id)
+									? 'Connected'
+									: 'Get this Buddy'}
+							</button>
 						</ul>
 					</li>
 				))}
@@ -203,6 +216,23 @@ const StudentMatchingPage = () => {
 	const [selectedCanton, setSelectedCanton] = useState('');
 	const [gender, setGender] = useState('');
 	const [language, setLanguage] = useState('');
+	const [teachers, setTeachers] = useState([]);
+	const [error, setError] = usePageError('');
+
+	useEffect(() => {
+		userService
+			.getAll()
+			.then((data) => {
+				const teachersData = data.filter(
+					(user) => user.buddyType === 'teacher'
+				);
+				setTeachers(teachersData);
+			})
+			.catch((error) => {
+				setError(error);
+				console.log(error);
+			});
+	}, []);
 
 	return (
 		<div>
@@ -218,6 +248,8 @@ const StudentMatchingPage = () => {
 						selectedCanton={selectedCanton}
 						gender={gender}
 						language={language}
+						teachers={teachers}
+						error={error}
 					/>
 				</div>
 			</main>
