@@ -37,7 +37,7 @@ async function login({ email, password }) {
 }
 
 function logout() {
-  localStorage.removeItem('userEmail');
+  localStorage.clear();
 	return authClient.post('/logout');
 }
 

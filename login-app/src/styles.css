@@ -372,11 +372,6 @@ section ul {
   justify-content: flex-start;
 }
 
-#user_teachers ul {
-  display: flex;
-  justify-content: space-between;
-}
-
 #user_teachers ul li {
   width: 24%;
   padding: 0;
