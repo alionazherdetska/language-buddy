@@ -373,13 +373,6 @@ section ul {
   justify-content: flex-start;
 }
 
-#user_teachers ul {
-  display: flex;
-  justify-content: space-between;
-  margin: 0;
-  padding: 0;
-}
-
 #user_teachers ul li {
   width: 23%;
   padding: 0;
