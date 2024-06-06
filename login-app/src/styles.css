@@ -319,10 +319,17 @@ h1 {
 }
 
 #user_teachers ul li ul li {
+  display: flex;
   flex-direction: column;
   width: 100%;
   padding: 0;
 }
+
+#user_teachers ul li ul li  {
+  justify-self: center;
+}
+
+
 
 #user_languages form {
   display: flex;
@@ -661,6 +668,11 @@ button a {
   text-decoration: none;
   color: #fff;
 }
+
+.btnmatch{
+  align-self: center;
+}
+
 
 button:hover {
   background: #fff;
