@@ -24,7 +24,7 @@ const LanguageSelector = ({ changeCanton, changeGender, changeLanguage }) => {
 
 	return (
 		<section id='user_languages'>
-			<h2>First select your language</h2>
+			<h2>Select the language you wish to learn</h2>
 			<ul>
 				<li onClick={() => handleLanguageChange(null)}>
 					<img
@@ -238,7 +238,6 @@ const StudentMatchingPage = () => {
 	}, []);
 
 	return (
-		<div>
 			<main>
 				<div className='content'>
 					<h1>Matching page</h1>
@@ -256,7 +255,6 @@ const StudentMatchingPage = () => {
 					/>
 				</div>
 			</main>
-		</div>
 	);
 };
 
