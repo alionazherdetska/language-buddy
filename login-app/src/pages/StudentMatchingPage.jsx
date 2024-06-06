@@ -191,7 +191,10 @@ const TeacherList = ({ selectedCanton, gender, language, teachers, error }) => {
 								<strong>Mother tongue:</strong> {teacher.motherTongue}
 							</li>
 							<li>
-								<strong>Bio:</strong> {teacher.bio}
+								<strong>Bio:</strong>
+							</li>
+							<li>
+								{teacher.bio}
 							</li>
 
 							<button
