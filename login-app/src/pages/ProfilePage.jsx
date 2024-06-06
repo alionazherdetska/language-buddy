@@ -3,6 +3,7 @@ import '../styles.css';
 import { userService } from '../services/userService';
 import { usePageError } from '../hooks/usePageError';
 import { languageMapping } from '../utils/languageMapping';
+import { getRandomImage } from '../utils/getRandomAvatarImage.js';
 
 export const ProfilePage = () => {
 	const email = localStorage.getItem('userEmail');
@@ -11,19 +12,23 @@ export const ProfilePage = () => {
 	const [loading, setLoading] = useState(false);
 	const [learningGoals, setLearningGoals] = useState('');
 	const [isEditing, setIsEditing] = useState(false);
+	const [buddyList, setBuddyList] = useState([]);
 
-	console.log(email);
+
 	useEffect(() => {
+		setLoading(true);
 		userService
 			.getAll()
 			.then((fetchedUsers) => {
-				console.log(fetchedUsers);
 				const foundUser = fetchedUsers.find((user) => user.email === email);
 				setUser(foundUser);
 				setLearningGoals(
 					foundUser.learningGoals ||
 						'Learn and use 50 essential German words and 20 basic phrases for everyday interactions (e.g., greetings, asking for directions, shopping). Form and understand simple sentences and questions, such as introducing oneself, talking about family, and asking basic questions. Understand basic spoken German in everyday contexts, such as greetings, simple instructions, and common phrases.'
 				);
+				const buddyTypeToFetch = foundUser.buddyType === 'teacher' ? 'student' : 'teacher';
+				const filteredBuddies = fetchedUsers.filter(user => user.buddyType === buddyTypeToFetch);
+				setBuddyList(filteredBuddies);
 				setLoading(false);
 			})
 			.catch((error) => {
@@ -89,32 +94,46 @@ export const ProfilePage = () => {
 							<button>Upload an image</button>
 						</div>
 					</section>
-					<section id='user_info'>
-						<section>
-							<h2>Personal information</h2>
+					<section  id="user_extra">
+						{user.buddyType === 'student' ? (
+							<section>
+								<h2>Student Information</h2>
+								<ul>
+									<li><strong>Name:</strong> {user.name}</li>
+									<li><strong>Surname:</strong> {user.surname}</li>
+									<li><strong>Country of origin:</strong> {user.countryOfOrigin}</li>
+									<li><strong>Canton:</strong> {user.canton}</li>
+									<li><strong>Mother tongue:</strong> {user.motherTongue}</li>
+									<li><strong>Bio:</strong> {user.bio}</li>
+								</ul>
+							</section>
+						) : (
+							<section>
+								<h2>Teacher Information</h2>
+								<ul>
+									<li><strong>Name:</strong> {user.name}</li>
+									<li><strong>Surname:</strong> {user.surname}</li>
+									<li><strong>Country of origin:</strong> {user.countryOfOrigin}</li>
+									<li><strong>Canton:</strong> {user.canton}</li>
+									<li><strong>Mother tongue:</strong> {user.motherTongue}</li>
+									<li><strong>Email:</strong> {user.email}</li>
+									<li><strong>Bio:</strong> {user.bio}</li>
+								</ul>
+							</section>
+						)}
+						{user.buddyType === 'teacher' ? (
+						<section class="resources">
+						<h2>List of resources</h2>
 							<ul>
-								<li>
-									<strong>Name:</strong>
-									{user.name}
-								</li>
-								<li>
-									<strong>Surname:</strong> {user.surname}
-								</li>
-								<li>
-									<strong>Country of origin:</strong> {user.countryOfOrigin}
-								</li>
-								<li>
-									<strong>Canton:</strong> {user.canton}
-								</li>
-								<li>
-									<strong>Mother tongue:</strong> {user.motherTongue}
-								</li>
-								<li>
-									<strong>Bio:</strong> {user.bio}
-								</li>
+								<li>Daily Vocabulary and Phrases: Learn and practice 5 new words and essential phrases.</li>
+								<li>Pronunciation Drills: Focus on difficult sounds and simple conversations.</li>
+								<li>Listening Practice: Listen to short dialogues and watch simple German videos.</li>
+								<li>Cultural Exchange: Share cultural stories in German.</li>
+								<li>Homework Support: Assist with German language homework and exercises.</li>
 							</ul>
 						</section>
-						<section>
+						) : (
+							<section>
 							{isEditing ? (
 								<>
 									<article>
@@ -152,8 +171,10 @@ export const ProfilePage = () => {
 								</>
 							)}
 						</section>
+						)}
 					</section>
-					<section id='user_languages'>
+					{user.buddyType === 'student' ? (
+						<section id='user_languages'>
 						<h2>My Languages</h2>
 						<ul>
 							<li>
@@ -163,140 +184,28 @@ export const ProfilePage = () => {
 								/>
 							</li>
 						</ul>
-					</section>
-					<section id='user_teachers'>
-						<h2>List of Teachers</h2>
-						<ul>
-							<li>
-								<img
-									src='../images/teacher-1.jpg'
-									alt='Dan'
-								/>
-								<ul>
-									<li>
-										<strong>Name:</strong> Dan
+						</section>
+						) : ("")}
+						<section id='user_teachers'>
+							<h2>List of {user.buddyType === 'student' ? 'Teachers' : 'Students'}</h2>
+							<ul>
+								{buddyList.map(buddy => (
+									<li key={buddy.email}>
+										<img
+											src={getRandomImage()}
+											alt={buddy.name}
+										/>
+										<ul>
+											<li><strong>Name:&nbsp;</strong> {buddy.name}</li>
+											<li><strong>Surname:&nbsp;</strong> {buddy.surname}</li>
+											<li><strong>Country of origin:&nbsp;</strong> {buddy.countryOfOrigin}</li>
+											<li><strong>Canton:&nbsp;</strong> {buddy.canton}</li>
+											<li><strong>Mother tongue:&nbsp;</strong> {buddy.motherTongue}</li>
+										</ul>
 									</li>
-									<li>
-										<strong>Surname:</strong> Bauer
-									</li>
-									<li>
-										<strong>Country of origin:</strong> Switzerland
-									</li>
-									<li>
-										<strong>Canton:</strong> Luzern
-									</li>
-									<li>
-										<strong>Mother tongue:</strong> German
-									</li>
-									<li>
-										<strong>Phone:</strong> +41 88 678 54 32
-									</li>
-									<li>
-										<strong>Email:</strong> dan@danov.cvp
-									</li>
-									<li>
-										<strong>Bio:</strong> I am an outgoing person
-									</li>
-								</ul>
-							</li>
-							<li>
-								<img
-									src='../images/teacher-2.jpg'
-									alt='Olivia'
-								/>
-								<ul>
-									<li>
-										<strong>Name:</strong> Olivia
-									</li>
-									<li>
-										<strong>Surname:</strong> Muller
-									</li>
-									<li>
-										<strong>Country of origin:</strong> Switzerland
-									</li>
-									<li>
-										<strong>Canton:</strong> Geneva
-									</li>
-									<li>
-										<strong>Mother tongue:</strong> German
-									</li>
-									<li>
-										<strong>Phone:</strong> +41 88 648 52 22
-									</li>
-									<li>
-										<strong>Email:</strong> olivia@example.cvp
-									</li>
-									<li>
-										<strong>Bio:</strong> I like
-									</li>
-								</ul>
-							</li>
-							<li>
-								<img
-									src='../images/teacher-3.jpg'
-									alt='Stefan'
-								/>
-								<ul>
-									<li>
-										<strong>Name:</strong> Stefan
-									</li>
-									<li>
-										<strong>Surname:</strong> Buzecki
-									</li>
-									<li>
-										<strong>Country of origin:</strong> Albania
-									</li>
-									<li>
-										<strong>Canton:</strong> Aargau
-									</li>
-									<li>
-										<strong>Mother tongue:</strong> German
-									</li>
-									<li>
-										<strong>Phone:</strong> +41 88 748 35 95
-									</li>
-									<li>
-										<strong>Email:</strong> stefan@liber.cvp
-									</li>
-									<li>
-										<strong>Bio:</strong> I love languages
-									</li>
-								</ul>
-							</li>
-							<li>
-								<img
-									src='../images/teacher-4.jpg'
-									alt='Melanie'
-								/>
-								<ul>
-									<li>
-										<strong>Name:</strong> Melanie
-									</li>
-									<li>
-										<strong>Surname:</strong> Stoff
-									</li>
-									<li>
-										<strong>Country of origin:</strong> Switzerland
-									</li>
-									<li>
-										<strong>Canton:</strong> Tessin
-									</li>
-									<li>
-										<strong>Mother tongue:</strong> German
-									</li>
-									<li>
-										<strong>Phone:</strong> +41 88 256 14 09
-									</li>
-									<li>
-										<strong>Email:</strong> melanie@oko.cvp
-									</li>
-									<li>
-										<strong>Bio:</strong> Hiking
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</section>
+								))}
+							</ul>
+						</section>
 				</div>
 			</main>
 		</div>
